@@ -1,0 +1,283 @@
+\hypertarget{echo_8c}{
+\section{echo.c File Reference}
+\label{echo_8c}\index{echo.c@{echo.c}}
+}
+{\ttfamily \#include $<$stdint.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{echo_8c_a717f5dde01402c1086426e7e8bee9e46}{REG\_\-LOG\_\-TRIG}~((volatile unsigned char $\ast$) (0x00200001))
+\item 
+\#define \hyperlink{echo_8c_ad8ba7fa53d674323467cdb1c2eeb51f0}{REG\_\-LOG\_\-BUFF}~((volatile unsigned char $\ast$) (0x00200000))
+\item 
+\#define \hyperlink{echo_8c_a505fc98313f70f37d342e20c66ba4b1a}{REG\_\-UART\_\-BASE}~((unsigned char $\ast$) 0x00100000)
+\item 
+\#define \hyperlink{echo_8c_a9857b844f980818584e81fc2fbcbf255}{REG\_\-UARTDR}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0))
+\item 
+\#define \hyperlink{echo_8c_ab113072dfdced6e84bff6a3a72e41998}{REG\_\-UARTFR}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x18))
+\item 
+\#define \hyperlink{echo_8c_a0768186a883b452be91c3de8934dad46}{REG\_\-UARTLCR\_\-H}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x2C))
+\item 
+\#define \hyperlink{echo_8c_a02f031f84036c2177ffb1aeb07206691}{REG\_\-UARTCR}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x30))
+\item 
+\#define \hyperlink{echo_8c_a55be826a8d2128acd589015b0c579b29}{REG\_\-UARTRIS}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x3C))
+\item 
+\#define \hyperlink{echo_8c_a7cb92e66324bf13723540afbd2b6e632}{REG\_\-UARTIMSC}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x38))
+\item 
+\#define \hyperlink{echo_8c_a537be953b236e1b3c8f48199cfcd4ddf}{REG\_\-UARTMIS}~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x40))
+\item 
+\#define \hyperlink{echo_8c_ad390a18ff56e454c1d83d2ff1f572a0b}{REG\_\-BIT\_\-RXFE}~(0x01 $<$$<$ 4)
+\item 
+\#define \hyperlink{echo_8c_a777f5bfc806d6ffe1d2b22b5615b9f46}{CHAR\_\-CTRL\_\-D}~(0x04)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{echo_8c_acd2b9c19b11d9e2695943a6ee3ac132b}{dbg\_\-print} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Uses the platform's debug memory region to print debug messages. \item\end{DoxyCompactList}\item 
+void \hyperlink{echo_8c_a4cce5fbc5955127fb1a19c834b8bc392}{concat\_\-str} (char $\ast$buff, char $\ast$str1, char $\ast$str2)
+\begin{DoxyCompactList}\small\item\em Concat string 1 and string 2 and copy to buff. \item\end{DoxyCompactList}\item 
+void \hyperlink{echo_8c_a8c1ca4d6d9508b8dbbd611ce900bff92}{itos} (char $\ast$buff, \hyperlink{platform_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_\-t} i)
+\begin{DoxyCompactList}\small\item\em Convert integer to string. \item\end{DoxyCompactList}\item 
+int \hyperlink{echo_8c_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\begin{DoxyCompactList}\small\item\em Application entry point, initializes the UART and echoes any data it receives through the UART. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$const \hyperlink{echo_8c_ad87aaf5d83358ac7e0ea875004579fdc}{str\_\-out} = \char`\"{}Hello, OVP!!!\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Demo application for the Cortex-\/M3 test platform.
+
+\begin{DoxyAuthor}{Author}
+Shahzeb Ihsan 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0 
+\end{DoxyVersion}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{platform_8c}{platform.c} 
+\end{DoxySeeAlso}
+
+
+Definition in file \hyperlink{echo_8c_source}{echo.c}.
+
+
+
+\subsection{Define Documentation}
+\hypertarget{echo_8c_a777f5bfc806d6ffe1d2b22b5615b9f46}{
+\index{echo.c@{echo.c}!CHAR\_\-CTRL\_\-D@{CHAR\_\-CTRL\_\-D}}
+\index{CHAR\_\-CTRL\_\-D@{CHAR\_\-CTRL\_\-D}!echo.c@{echo.c}}
+\subsubsection[{CHAR\_\-CTRL\_\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define CHAR\_\-CTRL\_\-D~(0x04)}}
+\label{echo_8c_a777f5bfc806d6ffe1d2b22b5615b9f46}
+
+
+Definition at line 31 of file echo.c.
+
+\hypertarget{echo_8c_ad390a18ff56e454c1d83d2ff1f572a0b}{
+\index{echo.c@{echo.c}!REG\_\-BIT\_\-RXFE@{REG\_\-BIT\_\-RXFE}}
+\index{REG\_\-BIT\_\-RXFE@{REG\_\-BIT\_\-RXFE}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-BIT\_\-RXFE}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-BIT\_\-RXFE~(0x01 $<$$<$ 4)}}
+\label{echo_8c_ad390a18ff56e454c1d83d2ff1f572a0b}
+
+
+Definition at line 28 of file echo.c.
+
+\hypertarget{echo_8c_ad8ba7fa53d674323467cdb1c2eeb51f0}{
+\index{echo.c@{echo.c}!REG\_\-LOG\_\-BUFF@{REG\_\-LOG\_\-BUFF}}
+\index{REG\_\-LOG\_\-BUFF@{REG\_\-LOG\_\-BUFF}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-LOG\_\-BUFF}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-LOG\_\-BUFF~((volatile unsigned char $\ast$) (0x00200000))}}
+\label{echo_8c_ad8ba7fa53d674323467cdb1c2eeb51f0}
+
+
+Definition at line 15 of file echo.c.
+
+\hypertarget{echo_8c_a717f5dde01402c1086426e7e8bee9e46}{
+\index{echo.c@{echo.c}!REG\_\-LOG\_\-TRIG@{REG\_\-LOG\_\-TRIG}}
+\index{REG\_\-LOG\_\-TRIG@{REG\_\-LOG\_\-TRIG}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-LOG\_\-TRIG}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-LOG\_\-TRIG~((volatile unsigned char $\ast$) (0x00200001))}}
+\label{echo_8c_a717f5dde01402c1086426e7e8bee9e46}
+
+
+Definition at line 14 of file echo.c.
+
+\hypertarget{echo_8c_a505fc98313f70f37d342e20c66ba4b1a}{
+\index{echo.c@{echo.c}!REG\_\-UART\_\-BASE@{REG\_\-UART\_\-BASE}}
+\index{REG\_\-UART\_\-BASE@{REG\_\-UART\_\-BASE}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UART\_\-BASE}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UART\_\-BASE~((unsigned char $\ast$) 0x00100000)}}
+\label{echo_8c_a505fc98313f70f37d342e20c66ba4b1a}
+
+
+Definition at line 18 of file echo.c.
+
+\hypertarget{echo_8c_a02f031f84036c2177ffb1aeb07206691}{
+\index{echo.c@{echo.c}!REG\_\-UARTCR@{REG\_\-UARTCR}}
+\index{REG\_\-UARTCR@{REG\_\-UARTCR}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTCR}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTCR~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x30))}}
+\label{echo_8c_a02f031f84036c2177ffb1aeb07206691}
+
+
+Definition at line 22 of file echo.c.
+
+\hypertarget{echo_8c_a9857b844f980818584e81fc2fbcbf255}{
+\index{echo.c@{echo.c}!REG\_\-UARTDR@{REG\_\-UARTDR}}
+\index{REG\_\-UARTDR@{REG\_\-UARTDR}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTDR~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0))}}
+\label{echo_8c_a9857b844f980818584e81fc2fbcbf255}
+
+
+Definition at line 19 of file echo.c.
+
+\hypertarget{echo_8c_ab113072dfdced6e84bff6a3a72e41998}{
+\index{echo.c@{echo.c}!REG\_\-UARTFR@{REG\_\-UARTFR}}
+\index{REG\_\-UARTFR@{REG\_\-UARTFR}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTFR}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTFR~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x18))}}
+\label{echo_8c_ab113072dfdced6e84bff6a3a72e41998}
+
+
+Definition at line 20 of file echo.c.
+
+\hypertarget{echo_8c_a7cb92e66324bf13723540afbd2b6e632}{
+\index{echo.c@{echo.c}!REG\_\-UARTIMSC@{REG\_\-UARTIMSC}}
+\index{REG\_\-UARTIMSC@{REG\_\-UARTIMSC}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTIMSC}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTIMSC~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x38))}}
+\label{echo_8c_a7cb92e66324bf13723540afbd2b6e632}
+
+
+Definition at line 24 of file echo.c.
+
+\hypertarget{echo_8c_a0768186a883b452be91c3de8934dad46}{
+\index{echo.c@{echo.c}!REG\_\-UARTLCR\_\-H@{REG\_\-UARTLCR\_\-H}}
+\index{REG\_\-UARTLCR\_\-H@{REG\_\-UARTLCR\_\-H}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTLCR\_\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTLCR\_\-H~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x2C))}}
+\label{echo_8c_a0768186a883b452be91c3de8934dad46}
+
+
+Definition at line 21 of file echo.c.
+
+\hypertarget{echo_8c_a537be953b236e1b3c8f48199cfcd4ddf}{
+\index{echo.c@{echo.c}!REG\_\-UARTMIS@{REG\_\-UARTMIS}}
+\index{REG\_\-UARTMIS@{REG\_\-UARTMIS}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTMIS}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTMIS~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x40))}}
+\label{echo_8c_a537be953b236e1b3c8f48199cfcd4ddf}
+
+
+Definition at line 25 of file echo.c.
+
+\hypertarget{echo_8c_a55be826a8d2128acd589015b0c579b29}{
+\index{echo.c@{echo.c}!REG\_\-UARTRIS@{REG\_\-UARTRIS}}
+\index{REG\_\-UARTRIS@{REG\_\-UARTRIS}!echo.c@{echo.c}}
+\subsubsection[{REG\_\-UARTRIS}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-UARTRIS~((volatile unsigned char $\ast$) (REG\_\-UART\_\-BASE + 0x3C))}}
+\label{echo_8c_a55be826a8d2128acd589015b0c579b29}
+
+
+Definition at line 23 of file echo.c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{echo_8c_a4cce5fbc5955127fb1a19c834b8bc392}{
+\index{echo.c@{echo.c}!concat\_\-str@{concat\_\-str}}
+\index{concat\_\-str@{concat\_\-str}!echo.c@{echo.c}}
+\subsubsection[{concat\_\-str}]{\setlength{\rightskip}{0pt plus 5cm}void concat\_\-str (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buff, }
+\item[{char $\ast$}]{str1, }
+\item[{char $\ast$}]{str2}
+\end{DoxyParamCaption}
+)}}
+\label{echo_8c_a4cce5fbc5955127fb1a19c834b8bc392}
+
+
+Concat string 1 and string 2 and copy to buff. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buff} & Target buffer.  First string.  Second string. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 69 of file echo.c.
+
+\hypertarget{echo_8c_acd2b9c19b11d9e2695943a6ee3ac132b}{
+\index{echo.c@{echo.c}!dbg\_\-print@{dbg\_\-print}}
+\index{dbg\_\-print@{dbg\_\-print}!echo.c@{echo.c}}
+\subsubsection[{dbg\_\-print}]{\setlength{\rightskip}{0pt plus 5cm}void dbg\_\-print (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}}
+\label{echo_8c_acd2b9c19b11d9e2695943a6ee3ac132b}
+
+
+Uses the platform's debug memory region to print debug messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to print out. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 43 of file echo.c.
+
+\hypertarget{echo_8c_a8c1ca4d6d9508b8dbbd611ce900bff92}{
+\index{echo.c@{echo.c}!itos@{itos}}
+\index{itos@{itos}!echo.c@{echo.c}}
+\subsubsection[{itos}]{\setlength{\rightskip}{0pt plus 5cm}void itos (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buff, }
+\item[{{\bf uint32\_\-t}}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{echo_8c_a8c1ca4d6d9508b8dbbd611ce900bff92}
+
+
+Convert integer to string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buff} & Buffer where to copy the string. \\
+\hline
+{\em i} & The integer to convert. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file echo.c.
+
+\hypertarget{echo_8c_a840291bc02cba5474a4cb46a9b9566fe}{
+\index{echo.c@{echo.c}!main@{main}}
+\index{main@{main}!echo.c@{echo.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{echo_8c_a840291bc02cba5474a4cb46a9b9566fe}
+
+
+Application entry point, initializes the UART and echoes any data it receives through the UART. 
+
+\begin{DoxyReturn}{Returns}
+Exit status. 
+\end{DoxyReturn}
+
+
+Definition at line 120 of file echo.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{echo_8c_ad87aaf5d83358ac7e0ea875004579fdc}{
+\index{echo.c@{echo.c}!str\_\-out@{str\_\-out}}
+\index{str\_\-out@{str\_\-out}!echo.c@{echo.c}}
+\subsubsection[{str\_\-out}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ const {\bf str\_\-out} = \char`\"{}Hello, OVP!!!\char`\"{}}}
+\label{echo_8c_ad87aaf5d83358ac7e0ea875004579fdc}
+
+
+Definition at line 34 of file echo.c.
+

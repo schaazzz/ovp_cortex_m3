@@ -1,0 +1,26 @@
+# project  configured on Sun Apr 24 21:06:02 2011 by
+# waf 1.6.3 (abi 98, python 20701f0 on win32)
+# using c:/dev/waf/waf configure build_platform
+#
+----------------------------------------
+Setting top to
+d:\workspace\ovp\cortex_m3_platform
+----------------------------------------
+Setting out to
+d:\workspace\ovp\cortex_m3_platform\build
+----------------------------------------
+Checking for program gcc
+C:\dev\mingw\bin\gcc.exe
+find program=['gcc'] paths=['.', 'C:\\dev\\mingw\\msys\\1.0\\local\\bin', 'C:\\dev\\mingw\\bin', 'C:\\dev\\mingw\\msys\\1.0\\bin', 'c:\\dev\\sourcery_ARM\\bin', 'd:\\Tools\\common\\CTC', 'c:\\Perl\\bin', 'c:\\PROGRA~1\\PVCS\\vm\\win32\\bin', 'c:\\PROGRA~1\\PVCS\\vm\\common\\bin\\win32', 'c:\\WINDOWS\\system32', 'c:\\WINDOWS', 'c:\\WINDOWS\\System32\\Wbem', 'c:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0', 'c:\\Program Files\\TortoiseHg\\', 'c:\\Program Files\\QuickTime\\QTSystem\\', 'c:\\dev\\yagarto\\bin', 'c:\\dev\\yagarto\\yagarto-tools-20100703\\bin', 'c:\\Program Files\\Common Files\\GTK\\2.0\\bin', 'c:\\Program Files\\doxygen\\bin', 'c:\\Program Files\\TortoiseSVN\\bin', 'c:\\Program Files\\GtkSharp\\2.12\\bin', 'c:\\dev\\python27\\', 'c:\\dev\\python27\\Scripts', 'c:\\dev\\ovp\\bin\\Windows', 'C:\\dev\\mingw\\msys\\1.0', 'C:\\dev\\mingw\\msys\\1.0\\bin', 'C:\\dev\\mingw\\msys\\1.0\\sbin', 'C:\\dev\\mingw\\msys\\1.0\\sbin\\awk', 'C:\\dev\\mingw\\bin', 'C:\\dev\\mingw\\mingw32\\bin', 'c:\\dev\\waf', 'c:\\Program Files\\Beyond Compare 3', 'c:\\dev\\ovp\\bin\\Windows'] var='compiler' -> 'C:\\dev\\mingw\\bin\\gcc.exe'
+----------------------------------------
+Checking for program arm-none-eabi-as
+C:\dev\yagarto\bin\arm-none-eabi-as.exe
+find program=['arm-none-eabi-as'] paths=['C:\\dev\\yagarto\\bin'] var='asm' -> 'C:\\dev\\yagarto\\bin\\arm-none-eabi-as.exe'
+----------------------------------------
+Checking for program arm-none-eabi-ld
+C:\dev\yagarto\bin\arm-none-eabi-ld.exe
+find program=['arm-none-eabi-ld'] paths=['C:\\dev\\yagarto\\bin'] var='linker' -> 'C:\\dev\\yagarto\\bin\\arm-none-eabi-ld.exe'
+----------------------------------------
+Checking for program arm-none-eabi-gcc
+C:\dev\yagarto\bin\arm-none-eabi-gcc.exe
+find program=['arm-none-eabi-gcc'] paths=['C:\\dev\\yagarto\\bin'] var='compiler' -> 'C:\\dev\\yagarto\\bin\\arm-none-eabi-gcc.exe'

@@ -1,0 +1,96 @@
+\hypertarget{platform_8c}{
+\section{platform.c File Reference}
+\label{platform_8c}\index{platform.c@{platform.c}}
+}
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$icm/icmCpuManager.h$>$}\par
+{\ttfamily \#include \char`\"{}platform.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{platform_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Simulation entry point. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$const \hyperlink{platform_8c_ab0c8d11b3c6829f43c68ed41fe46769b}{platform} = \char`\"{}cortex\_\-m3\_\-test\_\-platform.Windows.exe\char`\"{}
+\begin{DoxyCompactList}\small\item\em Platform executable name. \item\end{DoxyCompactList}\item 
+const char $\ast$const \hyperlink{platform_8c_ab879c8fbae669c13a54421b2a9effa55}{usage} = \char`\"{}$\backslash$r$\backslash$n is created in the current directory.$\backslash$r$\backslash$n\char`\"{}
+\begin{DoxyCompactList}\small\item\em Platform command line options. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Test OVP simulation platform which contains a Cortex-\/M3 processor, a single memory for code and data, and an ARM PrimeCell PL011 UART.
+
+\begin{DoxyAuthor}{Author}
+Shahzeb Ihsan 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0 
+\end{DoxyVersion}
+
+
+Definition in file \hyperlink{platform_8c_source}{platform.c}.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{platform_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{platform.c@{platform.c}!main@{main}}
+\index{main@{main}!platform.c@{platform.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}
+\label{platform_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Simulation entry point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Command-\/line arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Simulation status. 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file platform.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{platform_8c_ab0c8d11b3c6829f43c68ed41fe46769b}{
+\index{platform.c@{platform.c}!platform@{platform}}
+\index{platform@{platform}!platform.c@{platform.c}}
+\subsubsection[{platform}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ const {\bf platform} = \char`\"{}cortex\_\-m3\_\-test\_\-platform.Windows.exe\char`\"{}}}
+\label{platform_8c_ab0c8d11b3c6829f43c68ed41fe46769b}
+
+
+Platform executable name. 
+
+
+
+Definition at line 22 of file platform.c.
+
+\hypertarget{platform_8c_ab879c8fbae669c13a54421b2a9effa55}{
+\index{platform.c@{platform.c}!usage@{usage}}
+\index{usage@{usage}!platform.c@{platform.c}}
+\subsubsection[{usage}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ const {\bf usage} = \char`\"{}$\backslash$r$\backslash$n is created in the current directory.$\backslash$r$\backslash$n\char`\"{}}}
+\label{platform_8c_ab879c8fbae669c13a54421b2a9effa55}
+
+
+Platform command line options. 
+
+
+
+Definition at line 25 of file platform.c.
+

@@ -1,0 +1,1426 @@
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"cortex_m3_test_app.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 E8000000 		.text
+  20      02006E00 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.global	str_out
+  24              		.section	.rodata
+  25              		.align	2
+  26              	.LC0:
+  27 0000 48656C6C 		.ascii	"Hello, OVP!!!\000"
+  27      6F2C204F 
+  27      56502121 
+  27      2100
+  28 000e 0000     		.align	2
+  29              		.type	str_out, %object
+  30              		.size	str_out, 4
+  31              	str_out:
+  32 0010 00000000 		.word	.LC0
+  33              		.text
+  34              		.align	2
+  35              		.global	dbg_print
+  36              		.thumb
+  37              		.thumb_func
+  38              		.type	dbg_print, %function
+  39              	dbg_print:
+  40              	.LFB0:
+  41              		.file 1 "cortex_m3_test_app.c"
+   1:cortex_m3_test_app.c **** /**
+   2:cortex_m3_test_app.c ****  * @file
+   3:cortex_m3_test_app.c ****  * Demo application for the Cortex-M3 test platform.
+   4:cortex_m3_test_app.c ****  *
+   5:cortex_m3_test_app.c ****  * @author Shahzeb Ihsan
+   6:cortex_m3_test_app.c ****  * @version 1.0
+   7:cortex_m3_test_app.c ****  * @see cortex_m3_test_platform.c
+   8:cortex_m3_test_app.c ****  */
+   9:cortex_m3_test_app.c **** 
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 2
+
+
+  10:cortex_m3_test_app.c **** /* Standard headers */
+  11:cortex_m3_test_app.c **** #include <stdint.h>
+  12:cortex_m3_test_app.c **** 
+  13:cortex_m3_test_app.c **** /* Log register definitions */
+  14:cortex_m3_test_app.c **** #define REG_LOG_TRIG       ((volatile unsigned char *) (0x00200001))
+  15:cortex_m3_test_app.c **** #define REG_LOG_BUFF       ((volatile unsigned char *) (0x00200000))
+  16:cortex_m3_test_app.c **** 
+  17:cortex_m3_test_app.c **** /* UART register definitions */
+  18:cortex_m3_test_app.c **** #define REG_UART_BASE      ((unsigned char *) 0x00100000)
+  19:cortex_m3_test_app.c **** #define REG_UARTDR         ((volatile unsigned char *) (REG_UART_BASE + 0))
+  20:cortex_m3_test_app.c **** #define REG_UARTFR         ((volatile unsigned char *) (REG_UART_BASE + 0x18))
+  21:cortex_m3_test_app.c **** #define REG_UARTLCR_H      ((volatile unsigned char *) (REG_UART_BASE + 0x2C))
+  22:cortex_m3_test_app.c **** #define REG_UARTCR         ((volatile unsigned char *) (REG_UART_BASE + 0x30))
+  23:cortex_m3_test_app.c **** #define REG_UARTRIS        ((volatile unsigned char *) (REG_UART_BASE + 0x3C))
+  24:cortex_m3_test_app.c **** #define REG_UARTIMSC       ((volatile unsigned char *) (REG_UART_BASE + 0x38))
+  25:cortex_m3_test_app.c **** #define REG_UARTMIS        ((volatile unsigned char *) (REG_UART_BASE + 0x40))
+  26:cortex_m3_test_app.c **** 
+  27:cortex_m3_test_app.c **** /* UARTFR bit definitions */
+  28:cortex_m3_test_app.c **** #define REG_BIT_RXFE       (0x01 << 4)
+  29:cortex_m3_test_app.c **** 
+  30:cortex_m3_test_app.c **** /* Program definitions */
+  31:cortex_m3_test_app.c **** #define CHAR_CTRL_D        (0x04)
+  32:cortex_m3_test_app.c **** 
+  33:cortex_m3_test_app.c **** /* Local constants */
+  34:cortex_m3_test_app.c **** const char * const str_out = "Hello, OVP!!!";
+  35:cortex_m3_test_app.c **** 
+  36:cortex_m3_test_app.c **** 
+  37:cortex_m3_test_app.c **** /**
+  38:cortex_m3_test_app.c ****  * @brief Uses the platform's debug memory region to print
+  39:cortex_m3_test_app.c ****  *        debug messages
+  40:cortex_m3_test_app.c ****  *
+  41:cortex_m3_test_app.c ****  * @param str String to print out.
+  42:cortex_m3_test_app.c ****  */
+  43:cortex_m3_test_app.c **** void dbg_print(char * str)
+  44:cortex_m3_test_app.c **** {
+  42              		.loc 1 44 0
+  43              		.cfi_startproc
+  44              		@ args = 0, pretend = 0, frame = 16
+  45              		@ frame_needed = 1, uses_anonymous_args = 0
+  46              		@ link register save eliminated.
+  47 0000 80B4     		push	{r7}
+  48              	.LCFI0:
+  49              		.cfi_def_cfa_offset 4
+  50 0002 85B0     		sub	sp, sp, #20
+  51              	.LCFI1:
+  52              		.cfi_def_cfa_offset 24
+  53 0004 00AF     		add	r7, sp, #0
+  54              		.cfi_offset 7, -4
+  55              	.LCFI2:
+  56              		.cfi_def_cfa_register 7
+  57 0006 7860     		str	r0, [r7, #4]
+  45:cortex_m3_test_app.c ****    unsigned char index = 0;
+  58              		.loc 1 45 0
+  59 0008 4FF00003 		mov	r3, #0
+  60 000c FB73     		strb	r3, [r7, #15]
+  46:cortex_m3_test_app.c **** 
+  47:cortex_m3_test_app.c ****    /* Set the debug trigger. */
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 3
+
+
+  48:cortex_m3_test_app.c ****    *REG_LOG_TRIG = 0x00;
+  61              		.loc 1 48 0
+  62 000e 4FF00103 		mov	r3, #1
+  63 0012 C0F22003 		movt	r3, 32
+  64 0016 4FF00002 		mov	r2, #0
+  65 001a 1A70     		strb	r2, [r3, #0]
+  66              	.L2:
+  49:cortex_m3_test_app.c ****    do
+  50:cortex_m3_test_app.c ****    {
+  51:cortex_m3_test_app.c ****      *REG_LOG_BUFF = *(str + index++);
+  67              		.loc 1 51 0 discriminator 1
+  68 001c 4FF40013 		mov	r3, #2097152
+  69 0020 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+  70 0022 7968     		ldr	r1, [r7, #4]
+  71 0024 0A44     		add	r2, r1, r2
+  72 0026 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+  73 0028 1A70     		strb	r2, [r3, #0]
+  74 002a FB7B     		ldrb	r3, [r7, #15]
+  75 002c 03F10103 		add	r3, r3, #1
+  76 0030 FB73     		strb	r3, [r7, #15]
+  52:cortex_m3_test_app.c ****    } while(*(str + index) != '\0');
+  77              		.loc 1 52 0 discriminator 1
+  78 0032 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  79 0034 7A68     		ldr	r2, [r7, #4]
+  80 0036 1344     		add	r3, r2, r3
+  81 0038 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  82 003a 002B     		cmp	r3, #0
+  83 003c EED1     		bne	.L2
+  53:cortex_m3_test_app.c **** 
+  54:cortex_m3_test_app.c ****    /* Terminate the string. */
+  55:cortex_m3_test_app.c ****    *REG_LOG_BUFF = '\0';
+  84              		.loc 1 55 0
+  85 003e 4FF40013 		mov	r3, #2097152
+  86 0042 4FF00002 		mov	r2, #0
+  87 0046 1A70     		strb	r2, [r3, #0]
+  56:cortex_m3_test_app.c **** 
+  57:cortex_m3_test_app.c ****    /* Clear the trigger. */
+  58:cortex_m3_test_app.c ****    *REG_LOG_TRIG = 0xFF;
+  88              		.loc 1 58 0
+  89 0048 4FF00103 		mov	r3, #1
+  90 004c C0F22003 		movt	r3, 32
+  91 0050 4FF0FF02 		mov	r2, #255
+  92 0054 1A70     		strb	r2, [r3, #0]
+  59:cortex_m3_test_app.c **** }
+  93              		.loc 1 59 0
+  94 0056 07F11407 		add	r7, r7, #20
+  95 005a BD46     		mov	sp, r7
+  96 005c 80BC     		pop	{r7}
+  97 005e 7047     		bx	lr
+  98              		.cfi_endproc
+  99              	.LFE0:
+ 100              		.size	dbg_print, .-dbg_print
+ 101              		.align	2
+ 102              		.global	concat_str
+ 103              		.thumb
+ 104              		.thumb_func
+ 105              		.type	concat_str, %function
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 4
+
+
+ 106              	concat_str:
+ 107              	.LFB1:
+  60:cortex_m3_test_app.c **** 
+  61:cortex_m3_test_app.c **** /**
+  62:cortex_m3_test_app.c ****  * @brief Concat string 1 and string 2 and copy to buff.
+  63:cortex_m3_test_app.c ****  *
+  64:cortex_m3_test_app.c ****  * @param buff Target buffer.
+  65:cortex_m3_test_app.c ****  * @str1 First string.
+  66:cortex_m3_test_app.c ****  * @str2 Second string.
+  67:cortex_m3_test_app.c ****  */
+  68:cortex_m3_test_app.c **** void
+  69:cortex_m3_test_app.c **** concat_str(char * buff, char * str1, char * str2)
+  70:cortex_m3_test_app.c **** {
+ 108              		.loc 1 70 0
+ 109              		.cfi_startproc
+ 110              		@ args = 0, pretend = 0, frame = 24
+ 111              		@ frame_needed = 1, uses_anonymous_args = 0
+ 112              		@ link register save eliminated.
+ 113 0060 80B4     		push	{r7}
+ 114              	.LCFI3:
+ 115              		.cfi_def_cfa_offset 4
+ 116 0062 87B0     		sub	sp, sp, #28
+ 117              	.LCFI4:
+ 118              		.cfi_def_cfa_offset 32
+ 119 0064 00AF     		add	r7, sp, #0
+ 120              		.cfi_offset 7, -4
+ 121              	.LCFI5:
+ 122              		.cfi_def_cfa_register 7
+ 123 0066 F860     		str	r0, [r7, #12]
+ 124 0068 B960     		str	r1, [r7, #8]
+ 125 006a 7A60     		str	r2, [r7, #4]
+  71:cortex_m3_test_app.c ****    uint32_t i = 0, j;
+ 126              		.loc 1 71 0
+ 127 006c 4FF00003 		mov	r3, #0
+ 128 0070 7B61     		str	r3, [r7, #20]
+  72:cortex_m3_test_app.c **** 
+  73:cortex_m3_test_app.c ****    /* Copy the first string. */
+  74:cortex_m3_test_app.c ****    j = 0;
+ 129              		.loc 1 74 0
+ 130 0072 4FF00003 		mov	r3, #0
+ 131 0076 3B61     		str	r3, [r7, #16]
+  75:cortex_m3_test_app.c ****    while(str1[j] != '\0')
+ 132              		.loc 1 75 0
+ 133 0078 0FE0     		b	.L4
+ 134              	.L5:
+  76:cortex_m3_test_app.c ****    {
+  77:cortex_m3_test_app.c ****       buff[i++] = str1[j++];
+ 135              		.loc 1 77 0
+ 136 007a FA68     		ldr	r2, [r7, #12]
+ 137 007c 7B69     		ldr	r3, [r7, #20]
+ 138 007e 1344     		add	r3, r2, r3
+ 139 0080 B968     		ldr	r1, [r7, #8]
+ 140 0082 3A69     		ldr	r2, [r7, #16]
+ 141 0084 0A44     		add	r2, r1, r2
+ 142 0086 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 143 0088 1A70     		strb	r2, [r3, #0]
+ 144 008a 7B69     		ldr	r3, [r7, #20]
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 5
+
+
+ 145 008c 03F10103 		add	r3, r3, #1
+ 146 0090 7B61     		str	r3, [r7, #20]
+ 147 0092 3B69     		ldr	r3, [r7, #16]
+ 148 0094 03F10103 		add	r3, r3, #1
+ 149 0098 3B61     		str	r3, [r7, #16]
+ 150              	.L4:
+  75:cortex_m3_test_app.c ****    while(str1[j] != '\0')
+ 151              		.loc 1 75 0 discriminator 1
+ 152 009a BA68     		ldr	r2, [r7, #8]
+ 153 009c 3B69     		ldr	r3, [r7, #16]
+ 154 009e 1344     		add	r3, r2, r3
+ 155 00a0 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 156 00a2 002B     		cmp	r3, #0
+ 157 00a4 E9D1     		bne	.L5
+  78:cortex_m3_test_app.c ****    }
+  79:cortex_m3_test_app.c **** 
+  80:cortex_m3_test_app.c ****    /* Copy the second string. */
+  81:cortex_m3_test_app.c ****    j = 0;
+ 158              		.loc 1 81 0
+ 159 00a6 4FF00003 		mov	r3, #0
+ 160 00aa 3B61     		str	r3, [r7, #16]
+  82:cortex_m3_test_app.c ****    while(str2[j] != '\0')
+ 161              		.loc 1 82 0
+ 162 00ac 0FE0     		b	.L6
+ 163              	.L7:
+  83:cortex_m3_test_app.c ****    {
+  84:cortex_m3_test_app.c ****       buff[i++] = str2[j++];
+ 164              		.loc 1 84 0
+ 165 00ae FA68     		ldr	r2, [r7, #12]
+ 166 00b0 7B69     		ldr	r3, [r7, #20]
+ 167 00b2 1344     		add	r3, r2, r3
+ 168 00b4 7968     		ldr	r1, [r7, #4]
+ 169 00b6 3A69     		ldr	r2, [r7, #16]
+ 170 00b8 0A44     		add	r2, r1, r2
+ 171 00ba 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 172 00bc 1A70     		strb	r2, [r3, #0]
+ 173 00be 7B69     		ldr	r3, [r7, #20]
+ 174 00c0 03F10103 		add	r3, r3, #1
+ 175 00c4 7B61     		str	r3, [r7, #20]
+ 176 00c6 3B69     		ldr	r3, [r7, #16]
+ 177 00c8 03F10103 		add	r3, r3, #1
+ 178 00cc 3B61     		str	r3, [r7, #16]
+ 179              	.L6:
+  82:cortex_m3_test_app.c ****    while(str2[j] != '\0')
+ 180              		.loc 1 82 0 discriminator 1
+ 181 00ce 7A68     		ldr	r2, [r7, #4]
+ 182 00d0 3B69     		ldr	r3, [r7, #16]
+ 183 00d2 1344     		add	r3, r2, r3
+ 184 00d4 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 185 00d6 002B     		cmp	r3, #0
+ 186 00d8 E9D1     		bne	.L7
+  85:cortex_m3_test_app.c ****    }
+  86:cortex_m3_test_app.c **** 
+  87:cortex_m3_test_app.c ****    /* Terminate the string. */
+  88:cortex_m3_test_app.c ****    buff[i] = '\0';
+ 187              		.loc 1 88 0
+ 188 00da FA68     		ldr	r2, [r7, #12]
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 6
+
+
+ 189 00dc 7B69     		ldr	r3, [r7, #20]
+ 190 00de 1344     		add	r3, r2, r3
+ 191 00e0 4FF00002 		mov	r2, #0
+ 192 00e4 1A70     		strb	r2, [r3, #0]
+  89:cortex_m3_test_app.c **** }
+ 193              		.loc 1 89 0
+ 194 00e6 07F11C07 		add	r7, r7, #28
+ 195 00ea BD46     		mov	sp, r7
+ 196 00ec 80BC     		pop	{r7}
+ 197 00ee 7047     		bx	lr
+ 198              		.cfi_endproc
+ 199              	.LFE1:
+ 200              		.size	concat_str, .-concat_str
+ 201              		.align	2
+ 202              		.global	itos
+ 203              		.thumb
+ 204              		.thumb_func
+ 205              		.type	itos, %function
+ 206              	itos:
+ 207              	.LFB2:
+  90:cortex_m3_test_app.c **** 
+  91:cortex_m3_test_app.c **** /**
+  92:cortex_m3_test_app.c ****  * @brief Convert integer to string.
+  93:cortex_m3_test_app.c ****  *
+  94:cortex_m3_test_app.c ****  * @param buff Buffer where to copy the string.
+  95:cortex_m3_test_app.c ****  * @param i The integer to convert.
+  96:cortex_m3_test_app.c ****  */
+  97:cortex_m3_test_app.c **** void
+  98:cortex_m3_test_app.c **** itos(char * buff, uint32_t i)
+  99:cortex_m3_test_app.c **** {
+ 208              		.loc 1 99 0
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 16
+ 211              		@ frame_needed = 1, uses_anonymous_args = 0
+ 212              		@ link register save eliminated.
+ 213 00f0 80B4     		push	{r7}
+ 214              	.LCFI6:
+ 215              		.cfi_def_cfa_offset 4
+ 216 00f2 85B0     		sub	sp, sp, #20
+ 217              	.LCFI7:
+ 218              		.cfi_def_cfa_offset 24
+ 219 00f4 00AF     		add	r7, sp, #0
+ 220              		.cfi_offset 7, -4
+ 221              	.LCFI8:
+ 222              		.cfi_def_cfa_register 7
+ 223 00f6 7860     		str	r0, [r7, #4]
+ 224 00f8 3960     		str	r1, [r7, #0]
+ 100:cortex_m3_test_app.c ****    uint8_t j, k = 0;
+ 225              		.loc 1 100 0
+ 226 00fa 4FF00003 		mov	r3, #0
+ 227 00fe FB73     		strb	r3, [r7, #15]
+ 228              	.L9:
+ 101:cortex_m3_test_app.c ****    do
+ 102:cortex_m3_test_app.c ****    {
+ 103:cortex_m3_test_app.c ****       j = i % 10;
+ 229              		.loc 1 103 0 discriminator 1
+ 230 0100 3968     		ldr	r1, [r7, #0]
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 7
+
+
+ 231 0102 4CF6CD43 		movw	r3, #52429
+ 232 0106 CCF6CC43 		movt	r3, 52428
+ 233 010a A3FB0123 		umull	r2, r3, r3, r1
+ 234 010e 4FEAD302 		lsr	r2, r3, #3
+ 235 0112 1346     		mov	r3, r2
+ 236 0114 4FEA8303 		lsl	r3, r3, #2
+ 237 0118 1344     		add	r3, r3, r2
+ 238 011a 4FEA4303 		lsl	r3, r3, #1
+ 239 011e C3EB0102 		rsb	r2, r3, r1
+ 240 0122 1346     		mov	r3, r2
+ 241 0124 BB73     		strb	r3, [r7, #14]
+ 104:cortex_m3_test_app.c ****       i = i / 10;
+ 242              		.loc 1 104 0 discriminator 1
+ 243 0126 3A68     		ldr	r2, [r7, #0]
+ 244 0128 4CF6CD43 		movw	r3, #52429
+ 245 012c CCF6CC43 		movt	r3, 52428
+ 246 0130 A3FB0213 		umull	r1, r3, r3, r2
+ 247 0134 4FEAD303 		lsr	r3, r3, #3
+ 248 0138 3B60     		str	r3, [r7, #0]
+ 105:cortex_m3_test_app.c ****       buff[k++] = j + 0x30;
+ 249              		.loc 1 105 0 discriminator 1
+ 250 013a FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 251 013c 7A68     		ldr	r2, [r7, #4]
+ 252 013e 1344     		add	r3, r2, r3
+ 253 0140 BA7B     		ldrb	r2, [r7, #14]
+ 254 0142 02F13002 		add	r2, r2, #48
+ 255 0146 D2B2     		uxtb	r2, r2
+ 256 0148 1A70     		strb	r2, [r3, #0]
+ 257 014a FB7B     		ldrb	r3, [r7, #15]
+ 258 014c 03F10103 		add	r3, r3, #1
+ 259 0150 FB73     		strb	r3, [r7, #15]
+ 106:cortex_m3_test_app.c ****    } while(i / 10);
+ 260              		.loc 1 106 0 discriminator 1
+ 261 0152 3B68     		ldr	r3, [r7, #0]
+ 262 0154 092B     		cmp	r3, #9
+ 263 0156 D3D8     		bhi	.L9
+ 107:cortex_m3_test_app.c **** 
+ 108:cortex_m3_test_app.c ****    /* Terminate the string. */
+ 109:cortex_m3_test_app.c ****    buff[k] = '\0';
+ 264              		.loc 1 109 0
+ 265 0158 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 266 015a 7A68     		ldr	r2, [r7, #4]
+ 267 015c 1344     		add	r3, r2, r3
+ 268 015e 4FF00002 		mov	r2, #0
+ 269 0162 1A70     		strb	r2, [r3, #0]
+ 110:cortex_m3_test_app.c **** }
+ 270              		.loc 1 110 0
+ 271 0164 07F11407 		add	r7, r7, #20
+ 272 0168 BD46     		mov	sp, r7
+ 273 016a 80BC     		pop	{r7}
+ 274 016c 7047     		bx	lr
+ 275              		.cfi_endproc
+ 276              	.LFE2:
+ 277              		.size	itos, .-itos
+ 278              		.section	.rodata
+ 279              		.align	2
+ 280              	.LC1:
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 8
+
+
+ 281 0014 3E3E3E20 		.ascii	">>> Starting echo program...\000"
+ 281      53746172 
+ 281      74696E67 
+ 281      20656368 
+ 281      6F207072 
+ 282 0031 000000   		.align	2
+ 283              	.LC2:
+ 284 0034 3E3E3E20 		.ascii	">>> Ctrl-D recieved, terminating program...\000"
+ 284      4374726C 
+ 284      2D442072 
+ 284      65636965 
+ 284      7665642C 
+ 285              		.align	2
+ 286              	.LC3:
+ 287 0060 3E3E3E20 		.ascii	">>> Number of characters received: \000"
+ 287      4E756D62 
+ 287      6572206F 
+ 287      66206368 
+ 287      61726163 
+ 288              		.text
+ 289 016e 00BF     		.align	2
+ 290              		.global	main
+ 291              		.thumb
+ 292              		.thumb_func
+ 293              		.type	main, %function
+ 294              	main:
+ 295              	.LFB3:
+ 111:cortex_m3_test_app.c **** 
+ 112:cortex_m3_test_app.c **** /**
+ 113:cortex_m3_test_app.c ****  * @brief Application entry point, initializes the UART and echoes
+ 114:cortex_m3_test_app.c ****  *        any data it receives through the UART.
+ 115:cortex_m3_test_app.c ****  *
+ 116:cortex_m3_test_app.c ****  * @return Exit status.
+ 117:cortex_m3_test_app.c ****  */
+ 118:cortex_m3_test_app.c **** int
+ 119:cortex_m3_test_app.c **** main(void)
+ 120:cortex_m3_test_app.c **** {
+ 296              		.loc 1 120 0
+ 297              		.cfi_startproc
+ 298              		@ args = 0, pretend = 0, frame = 176
+ 299              		@ frame_needed = 1, uses_anonymous_args = 0
+ 300 0170 80B5     		push	{r7, lr}
+ 301              	.LCFI9:
+ 302              		.cfi_def_cfa_offset 8
+ 303 0172 ACB0     		sub	sp, sp, #176
+ 304              	.LCFI10:
+ 305              		.cfi_def_cfa_offset 184
+ 306 0174 00AF     		add	r7, sp, #0
+ 307              		.cfi_offset 14, -4
+ 308              		.cfi_offset 7, -8
+ 309              	.LCFI11:
+ 310              		.cfi_def_cfa_register 7
+ 121:cortex_m3_test_app.c ****    char c;
+ 122:cortex_m3_test_app.c ****    uint32_t i;
+ 123:cortex_m3_test_app.c ****    uint32_t char_cnt = 0;;
+ 311              		.loc 1 123 0
+ 312 0176 4FF00003 		mov	r3, #0
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 9
+
+
+ 313 017a C7F8A830 		str	r3, [r7, #168]
+ 124:cortex_m3_test_app.c ****    uint8_t temp[32], buff[128];
+ 125:cortex_m3_test_app.c **** 
+ 126:cortex_m3_test_app.c ****    /* UART initialization. */
+ 127:cortex_m3_test_app.c ****    *REG_UARTLCR_H = 0x10;
+ 314              		.loc 1 127 0
+ 315 017e 4FF02C03 		mov	r3, #44
+ 316 0182 C0F21003 		movt	r3, 16
+ 317 0186 4FF01002 		mov	r2, #16
+ 318 018a 1A70     		strb	r2, [r3, #0]
+ 128:cortex_m3_test_app.c ****    *REG_UARTCR |= 0x11;
+ 319              		.loc 1 128 0
+ 320 018c 4FF03003 		mov	r3, #48
+ 321 0190 C0F21003 		movt	r3, 16
+ 322 0194 4FF03002 		mov	r2, #48
+ 323 0198 C0F21002 		movt	r2, 16
+ 324 019c 1278     		ldrb	r2, [r2, #0]
+ 325 019e D2B2     		uxtb	r2, r2
+ 326 01a0 42F01102 		orr	r2, r2, #17
+ 327 01a4 D2B2     		uxtb	r2, r2
+ 328 01a6 1A70     		strb	r2, [r3, #0]
+ 129:cortex_m3_test_app.c **** 
+ 130:cortex_m3_test_app.c ****    /* Program loop, terminates when its receives Ctrl-D. */
+ 131:cortex_m3_test_app.c ****    dbg_print(">>> Starting echo program...");
+ 329              		.loc 1 131 0
+ 330 01a8 40F20000 		movw	r0, #:lower16:.LC1
+ 331 01ac C0F20000 		movt	r0, #:upper16:.LC1
+ 332 01b0 FFF7FEFF 		bl	dbg_print
+ 132:cortex_m3_test_app.c ****    while(1)
+ 133:cortex_m3_test_app.c ****    {
+ 134:cortex_m3_test_app.c ****       /* Wait to receive a character. */
+ 135:cortex_m3_test_app.c ****       while((*REG_UARTFR & REG_BIT_RXFE) != 0)
+ 333              		.loc 1 135 0
+ 334 01b4 0DE0     		b	.L11
+ 335              	.L13:
+ 136:cortex_m3_test_app.c ****       {
+ 137:cortex_m3_test_app.c ****          i = 100;
+ 336              		.loc 1 137 0
+ 337 01b6 4FF06403 		mov	r3, #100
+ 338 01ba C7F8AC30 		str	r3, [r7, #172]
+ 339              	.L12:
+ 138:cortex_m3_test_app.c ****          while(--i);
+ 340              		.loc 1 138 0 discriminator 1
+ 341 01be D7F8AC30 		ldr	r3, [r7, #172]
+ 342 01c2 03F1FF33 		add	r3, r3, #-1
+ 343 01c6 C7F8AC30 		str	r3, [r7, #172]
+ 344 01ca D7F8AC30 		ldr	r3, [r7, #172]
+ 345 01ce 002B     		cmp	r3, #0
+ 346 01d0 F5D1     		bne	.L12
+ 347              	.L11:
+ 135:cortex_m3_test_app.c ****       while((*REG_UARTFR & REG_BIT_RXFE) != 0)
+ 348              		.loc 1 135 0 discriminator 1
+ 349 01d2 4FF01803 		mov	r3, #24
+ 350 01d6 C0F21003 		movt	r3, 16
+ 351 01da 1B78     		ldrb	r3, [r3, #0]
+ 352 01dc DBB2     		uxtb	r3, r3
+ 353 01de 03F01003 		and	r3, r3, #16
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 10
+
+
+ 354 01e2 002B     		cmp	r3, #0
+ 355 01e4 E7D1     		bne	.L13
+ 139:cortex_m3_test_app.c ****       }
+ 140:cortex_m3_test_app.c **** 
+ 141:cortex_m3_test_app.c ****       /* Read the character. */
+ 142:cortex_m3_test_app.c ****       c = *REG_UARTDR;
+ 356              		.loc 1 142 0
+ 357 01e6 4FF48013 		mov	r3, #1048576
+ 358 01ea 1B78     		ldrb	r3, [r3, #0]
+ 359 01ec 87F8A730 		strb	r3, [r7, #167]
+ 143:cortex_m3_test_app.c **** 
+ 144:cortex_m3_test_app.c ****       /* Break out of the loop if the received character
+ 145:cortex_m3_test_app.c ****        * is Ctrl-D. */
+ 146:cortex_m3_test_app.c ****       if(c == CHAR_CTRL_D)
+ 360              		.loc 1 146 0
+ 361 01f0 97F8A730 		ldrb	r3, [r7, #167]	@ zero_extendqisi2
+ 362 01f4 042B     		cmp	r3, #4
+ 363 01f6 24D1     		bne	.L14
+ 147:cortex_m3_test_app.c ****       {
+ 148:cortex_m3_test_app.c ****          dbg_print(">>> Ctrl-D recieved, terminating program...");
+ 364              		.loc 1 148 0
+ 365 01f8 40F20000 		movw	r0, #:lower16:.LC2
+ 366 01fc C0F20000 		movt	r0, #:upper16:.LC2
+ 367 0200 FFF7FEFF 		bl	dbg_print
+ 149:cortex_m3_test_app.c ****          break;
+ 150:cortex_m3_test_app.c ****       }
+ 151:cortex_m3_test_app.c **** 
+ 152:cortex_m3_test_app.c ****       /* Echo the character. */
+ 153:cortex_m3_test_app.c ****       *REG_UARTDR = c;
+ 154:cortex_m3_test_app.c ****       char_cnt++;
+ 155:cortex_m3_test_app.c ****    }
+ 156:cortex_m3_test_app.c **** 
+ 157:cortex_m3_test_app.c ****    itos(temp, char_cnt);
+ 368              		.loc 1 157 0
+ 369 0204 07F18403 		add	r3, r7, #132
+ 370 0208 1846     		mov	r0, r3
+ 371 020a D7F8A810 		ldr	r1, [r7, #168]
+ 372 020e FFF7FEFF 		bl	itos
+ 158:cortex_m3_test_app.c ****    concat_str(buff, ">>> Number of characters received: ", temp);
+ 373              		.loc 1 158 0
+ 374 0212 07F10402 		add	r2, r7, #4
+ 375 0216 07F18403 		add	r3, r7, #132
+ 376 021a 1046     		mov	r0, r2
+ 377 021c 40F20001 		movw	r1, #:lower16:.LC3
+ 378 0220 C0F20001 		movt	r1, #:upper16:.LC3
+ 379 0224 1A46     		mov	r2, r3
+ 380 0226 FFF7FEFF 		bl	concat_str
+ 159:cortex_m3_test_app.c ****    dbg_print(buff);
+ 381              		.loc 1 159 0
+ 382 022a 07F10403 		add	r3, r7, #4
+ 383 022e 1846     		mov	r0, r3
+ 384 0230 FFF7FEFF 		bl	dbg_print
+ 160:cortex_m3_test_app.c ****    return (0);
+ 385              		.loc 1 160 0
+ 386 0234 4FF00003 		mov	r3, #0
+ 161:cortex_m3_test_app.c **** }
+ 387              		.loc 1 161 0
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 11
+
+
+ 388 0238 1846     		mov	r0, r3
+ 389 023a 07F1B007 		add	r7, r7, #176
+ 390 023e BD46     		mov	sp, r7
+ 391 0240 80BD     		pop	{r7, pc}
+ 392              	.L14:
+ 153:cortex_m3_test_app.c ****       *REG_UARTDR = c;
+ 393              		.loc 1 153 0
+ 394 0242 4FF48013 		mov	r3, #1048576
+ 395 0246 97F8A720 		ldrb	r2, [r7, #167]
+ 396 024a 1A70     		strb	r2, [r3, #0]
+ 154:cortex_m3_test_app.c ****       char_cnt++;
+ 397              		.loc 1 154 0
+ 398 024c D7F8A830 		ldr	r3, [r7, #168]
+ 399 0250 03F10103 		add	r3, r3, #1
+ 400 0254 C7F8A830 		str	r3, [r7, #168]
+ 155:cortex_m3_test_app.c ****    }
+ 401              		.loc 1 155 0
+ 402 0258 00BF     		nop
+ 135:cortex_m3_test_app.c ****       while((*REG_UARTFR & REG_BIT_RXFE) != 0)
+ 403              		.loc 1 135 0
+ 404 025a BAE7     		b	.L11
+ 405              		.cfi_endproc
+ 406              	.LFE3:
+ 407              		.size	main, .-main
+ 408              	.Letext0:
+ 409              		.section	.debug_loc,"",%progbits
+ 410              	.Ldebug_loc0:
+ 411              	.LLST0:
+ 412 0000 00000000 		.4byte	.LFB0-.Ltext0
+ 413 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 414 0008 0200     		.2byte	0x2
+ 415 000a 7D       		.byte	0x7d
+ 416 000b 00       		.sleb128 0
+ 417 000c 02000000 		.4byte	.LCFI0-.Ltext0
+ 418 0010 04000000 		.4byte	.LCFI1-.Ltext0
+ 419 0014 0200     		.2byte	0x2
+ 420 0016 7D       		.byte	0x7d
+ 421 0017 04       		.sleb128 4
+ 422 0018 04000000 		.4byte	.LCFI1-.Ltext0
+ 423 001c 06000000 		.4byte	.LCFI2-.Ltext0
+ 424 0020 0200     		.2byte	0x2
+ 425 0022 7D       		.byte	0x7d
+ 426 0023 18       		.sleb128 24
+ 427 0024 06000000 		.4byte	.LCFI2-.Ltext0
+ 428 0028 60000000 		.4byte	.LFE0-.Ltext0
+ 429 002c 0200     		.2byte	0x2
+ 430 002e 77       		.byte	0x77
+ 431 002f 18       		.sleb128 24
+ 432 0030 00000000 		.4byte	0x0
+ 433 0034 00000000 		.4byte	0x0
+ 434              	.LLST1:
+ 435 0038 60000000 		.4byte	.LFB1-.Ltext0
+ 436 003c 62000000 		.4byte	.LCFI3-.Ltext0
+ 437 0040 0200     		.2byte	0x2
+ 438 0042 7D       		.byte	0x7d
+ 439 0043 00       		.sleb128 0
+ 440 0044 62000000 		.4byte	.LCFI3-.Ltext0
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 12
+
+
+ 441 0048 64000000 		.4byte	.LCFI4-.Ltext0
+ 442 004c 0200     		.2byte	0x2
+ 443 004e 7D       		.byte	0x7d
+ 444 004f 04       		.sleb128 4
+ 445 0050 64000000 		.4byte	.LCFI4-.Ltext0
+ 446 0054 66000000 		.4byte	.LCFI5-.Ltext0
+ 447 0058 0200     		.2byte	0x2
+ 448 005a 7D       		.byte	0x7d
+ 449 005b 20       		.sleb128 32
+ 450 005c 66000000 		.4byte	.LCFI5-.Ltext0
+ 451 0060 F0000000 		.4byte	.LFE1-.Ltext0
+ 452 0064 0200     		.2byte	0x2
+ 453 0066 77       		.byte	0x77
+ 454 0067 20       		.sleb128 32
+ 455 0068 00000000 		.4byte	0x0
+ 456 006c 00000000 		.4byte	0x0
+ 457              	.LLST2:
+ 458 0070 F0000000 		.4byte	.LFB2-.Ltext0
+ 459 0074 F2000000 		.4byte	.LCFI6-.Ltext0
+ 460 0078 0200     		.2byte	0x2
+ 461 007a 7D       		.byte	0x7d
+ 462 007b 00       		.sleb128 0
+ 463 007c F2000000 		.4byte	.LCFI6-.Ltext0
+ 464 0080 F4000000 		.4byte	.LCFI7-.Ltext0
+ 465 0084 0200     		.2byte	0x2
+ 466 0086 7D       		.byte	0x7d
+ 467 0087 04       		.sleb128 4
+ 468 0088 F4000000 		.4byte	.LCFI7-.Ltext0
+ 469 008c F6000000 		.4byte	.LCFI8-.Ltext0
+ 470 0090 0200     		.2byte	0x2
+ 471 0092 7D       		.byte	0x7d
+ 472 0093 18       		.sleb128 24
+ 473 0094 F6000000 		.4byte	.LCFI8-.Ltext0
+ 474 0098 6E010000 		.4byte	.LFE2-.Ltext0
+ 475 009c 0200     		.2byte	0x2
+ 476 009e 77       		.byte	0x77
+ 477 009f 18       		.sleb128 24
+ 478 00a0 00000000 		.4byte	0x0
+ 479 00a4 00000000 		.4byte	0x0
+ 480              	.LLST3:
+ 481 00a8 70010000 		.4byte	.LFB3-.Ltext0
+ 482 00ac 72010000 		.4byte	.LCFI9-.Ltext0
+ 483 00b0 0200     		.2byte	0x2
+ 484 00b2 7D       		.byte	0x7d
+ 485 00b3 00       		.sleb128 0
+ 486 00b4 72010000 		.4byte	.LCFI9-.Ltext0
+ 487 00b8 74010000 		.4byte	.LCFI10-.Ltext0
+ 488 00bc 0200     		.2byte	0x2
+ 489 00be 7D       		.byte	0x7d
+ 490 00bf 08       		.sleb128 8
+ 491 00c0 74010000 		.4byte	.LCFI10-.Ltext0
+ 492 00c4 76010000 		.4byte	.LCFI11-.Ltext0
+ 493 00c8 0300     		.2byte	0x3
+ 494 00ca 7D       		.byte	0x7d
+ 495 00cb B801     		.sleb128 184
+ 496 00cd 76010000 		.4byte	.LCFI11-.Ltext0
+ 497 00d1 5C020000 		.4byte	.LFE3-.Ltext0
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 13
+
+
+ 498 00d5 0300     		.2byte	0x3
+ 499 00d7 77       		.byte	0x77
+ 500 00d8 B801     		.sleb128 184
+ 501 00da 00000000 		.4byte	0x0
+ 502 00de 00000000 		.4byte	0x0
+ 503              		.file 2 "c:/dev/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 504              		.section	.debug_info
+ 505 0000 0C020000 		.4byte	0x20c
+ 506 0004 0200     		.2byte	0x2
+ 507 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 508 000a 04       		.byte	0x4
+ 509 000b 01       		.uleb128 0x1
+ 510 000c 18000000 		.4byte	.LASF21
+ 511 0010 01       		.byte	0x1
+ 512 0011 CC000000 		.4byte	.LASF22
+ 513 0015 2F000000 		.4byte	.LASF23
+ 514 0019 00000000 		.4byte	.Ltext0
+ 515 001d 5C020000 		.4byte	.Letext0
+ 516 0021 00000000 		.4byte	.Ldebug_line0
+ 517 0025 02       		.uleb128 0x2
+ 518 0026 01       		.byte	0x1
+ 519 0027 06       		.byte	0x6
+ 520 0028 08010000 		.4byte	.LASF0
+ 521 002c 03       		.uleb128 0x3
+ 522 002d C4000000 		.4byte	.LASF5
+ 523 0031 02       		.byte	0x2
+ 524 0032 2A       		.byte	0x2a
+ 525 0033 37000000 		.4byte	0x37
+ 526 0037 02       		.uleb128 0x2
+ 527 0038 01       		.byte	0x1
+ 528 0039 08       		.byte	0x8
+ 529 003a 4F000000 		.4byte	.LASF1
+ 530 003e 02       		.uleb128 0x2
+ 531 003f 02       		.byte	0x2
+ 532 0040 05       		.byte	0x5
+ 533 0041 EC000000 		.4byte	.LASF2
+ 534 0045 02       		.uleb128 0x2
+ 535 0046 02       		.byte	0x2
+ 536 0047 07       		.byte	0x7
+ 537 0048 74000000 		.4byte	.LASF3
+ 538 004c 02       		.uleb128 0x2
+ 539 004d 04       		.byte	0x4
+ 540 004e 05       		.byte	0x5
+ 541 004f FF000000 		.4byte	.LASF4
+ 542 0053 03       		.uleb128 0x3
+ 543 0054 F6000000 		.4byte	.LASF6
+ 544 0058 02       		.byte	0x2
+ 545 0059 50       		.byte	0x50
+ 546 005a 5E000000 		.4byte	0x5e
+ 547 005e 02       		.uleb128 0x2
+ 548 005f 04       		.byte	0x4
+ 549 0060 07       		.byte	0x7
+ 550 0061 5D000000 		.4byte	.LASF7
+ 551 0065 02       		.uleb128 0x2
+ 552 0066 08       		.byte	0x8
+ 553 0067 05       		.byte	0x5
+ 554 0068 00000000 		.4byte	.LASF8
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 14
+
+
+ 555 006c 02       		.uleb128 0x2
+ 556 006d 08       		.byte	0x8
+ 557 006e 07       		.byte	0x7
+ 558 006f AD000000 		.4byte	.LASF9
+ 559 0073 04       		.uleb128 0x4
+ 560 0074 04       		.byte	0x4
+ 561 0075 05       		.byte	0x5
+ 562 0076 696E7400 		.ascii	"int\000"
+ 563 007a 02       		.uleb128 0x2
+ 564 007b 04       		.byte	0x4
+ 565 007c 07       		.byte	0x7
+ 566 007d A0000000 		.4byte	.LASF10
+ 567 0081 05       		.uleb128 0x5
+ 568 0082 01       		.byte	0x1
+ 569 0083 0E000000 		.4byte	.LASF12
+ 570 0087 01       		.byte	0x1
+ 571 0088 2B       		.byte	0x2b
+ 572 0089 01       		.byte	0x1
+ 573 008a 00000000 		.4byte	.LFB0
+ 574 008e 60000000 		.4byte	.LFE0
+ 575 0092 00000000 		.4byte	.LLST0
+ 576 0096 B7000000 		.4byte	0xb7
+ 577 009a 06       		.uleb128 0x6
+ 578 009b 73747200 		.ascii	"str\000"
+ 579 009f 01       		.byte	0x1
+ 580 00a0 2B       		.byte	0x2b
+ 581 00a1 B7000000 		.4byte	0xb7
+ 582 00a5 02       		.byte	0x2
+ 583 00a6 91       		.byte	0x91
+ 584 00a7 6C       		.sleb128 -20
+ 585 00a8 07       		.uleb128 0x7
+ 586 00a9 E6000000 		.4byte	.LASF17
+ 587 00ad 01       		.byte	0x1
+ 588 00ae 2D       		.byte	0x2d
+ 589 00af 37000000 		.4byte	0x37
+ 590 00b3 02       		.byte	0x2
+ 591 00b4 91       		.byte	0x91
+ 592 00b5 77       		.sleb128 -9
+ 593 00b6 00       		.byte	0x0
+ 594 00b7 08       		.uleb128 0x8
+ 595 00b8 04       		.byte	0x4
+ 596 00b9 BD000000 		.4byte	0xbd
+ 597 00bd 02       		.uleb128 0x2
+ 598 00be 01       		.byte	0x1
+ 599 00bf 08       		.byte	0x8
+ 600 00c0 E1000000 		.4byte	.LASF11
+ 601 00c4 05       		.uleb128 0x5
+ 602 00c5 01       		.byte	0x1
+ 603 00c6 24000000 		.4byte	.LASF13
+ 604 00ca 01       		.byte	0x1
+ 605 00cb 45       		.byte	0x45
+ 606 00cc 01       		.byte	0x1
+ 607 00cd 60000000 		.4byte	.LFB1
+ 608 00d1 F0000000 		.4byte	.LFE1
+ 609 00d5 38000000 		.4byte	.LLST1
+ 610 00d9 20010000 		.4byte	0x120
+ 611 00dd 09       		.uleb128 0x9
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 15
+
+
+ 612 00de 8C000000 		.4byte	.LASF14
+ 613 00e2 01       		.byte	0x1
+ 614 00e3 45       		.byte	0x45
+ 615 00e4 B7000000 		.4byte	0xb7
+ 616 00e8 02       		.byte	0x2
+ 617 00e9 91       		.byte	0x91
+ 618 00ea 6C       		.sleb128 -20
+ 619 00eb 09       		.uleb128 0x9
+ 620 00ec 91000000 		.4byte	.LASF15
+ 621 00f0 01       		.byte	0x1
+ 622 00f1 45       		.byte	0x45
+ 623 00f2 B7000000 		.4byte	0xb7
+ 624 00f6 02       		.byte	0x2
+ 625 00f7 91       		.byte	0x91
+ 626 00f8 68       		.sleb128 -24
+ 627 00f9 09       		.uleb128 0x9
+ 628 00fa 96000000 		.4byte	.LASF16
+ 629 00fe 01       		.byte	0x1
+ 630 00ff 45       		.byte	0x45
+ 631 0100 B7000000 		.4byte	0xb7
+ 632 0104 02       		.byte	0x2
+ 633 0105 91       		.byte	0x91
+ 634 0106 64       		.sleb128 -28
+ 635 0107 0A       		.uleb128 0xa
+ 636 0108 6900     		.ascii	"i\000"
+ 637 010a 01       		.byte	0x1
+ 638 010b 47       		.byte	0x47
+ 639 010c 53000000 		.4byte	0x53
+ 640 0110 02       		.byte	0x2
+ 641 0111 91       		.byte	0x91
+ 642 0112 74       		.sleb128 -12
+ 643 0113 0A       		.uleb128 0xa
+ 644 0114 6A00     		.ascii	"j\000"
+ 645 0116 01       		.byte	0x1
+ 646 0117 47       		.byte	0x47
+ 647 0118 53000000 		.4byte	0x53
+ 648 011c 02       		.byte	0x2
+ 649 011d 91       		.byte	0x91
+ 650 011e 70       		.sleb128 -16
+ 651 011f 00       		.byte	0x0
+ 652 0120 05       		.uleb128 0x5
+ 653 0121 01       		.byte	0x1
+ 654 0122 87000000 		.4byte	.LASF18
+ 655 0126 01       		.byte	0x1
+ 656 0127 62       		.byte	0x62
+ 657 0128 01       		.byte	0x1
+ 658 0129 F0000000 		.4byte	.LFB2
+ 659 012d 6E010000 		.4byte	.LFE2
+ 660 0131 70000000 		.4byte	.LLST2
+ 661 0135 6C010000 		.4byte	0x16c
+ 662 0139 09       		.uleb128 0x9
+ 663 013a 8C000000 		.4byte	.LASF14
+ 664 013e 01       		.byte	0x1
+ 665 013f 62       		.byte	0x62
+ 666 0140 B7000000 		.4byte	0xb7
+ 667 0144 02       		.byte	0x2
+ 668 0145 91       		.byte	0x91
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 16
+
+
+ 669 0146 6C       		.sleb128 -20
+ 670 0147 06       		.uleb128 0x6
+ 671 0148 6900     		.ascii	"i\000"
+ 672 014a 01       		.byte	0x1
+ 673 014b 62       		.byte	0x62
+ 674 014c 53000000 		.4byte	0x53
+ 675 0150 02       		.byte	0x2
+ 676 0151 91       		.byte	0x91
+ 677 0152 68       		.sleb128 -24
+ 678 0153 0A       		.uleb128 0xa
+ 679 0154 6A00     		.ascii	"j\000"
+ 680 0156 01       		.byte	0x1
+ 681 0157 64       		.byte	0x64
+ 682 0158 2C000000 		.4byte	0x2c
+ 683 015c 02       		.byte	0x2
+ 684 015d 91       		.byte	0x91
+ 685 015e 76       		.sleb128 -10
+ 686 015f 0A       		.uleb128 0xa
+ 687 0160 6B00     		.ascii	"k\000"
+ 688 0162 01       		.byte	0x1
+ 689 0163 64       		.byte	0x64
+ 690 0164 2C000000 		.4byte	0x2c
+ 691 0168 02       		.byte	0x2
+ 692 0169 91       		.byte	0x91
+ 693 016a 77       		.sleb128 -9
+ 694 016b 00       		.byte	0x0
+ 695 016c 0B       		.uleb128 0xb
+ 696 016d 01       		.byte	0x1
+ 697 016e 9B000000 		.4byte	.LASF24
+ 698 0172 01       		.byte	0x1
+ 699 0173 77       		.byte	0x77
+ 700 0174 01       		.byte	0x1
+ 701 0175 73000000 		.4byte	0x73
+ 702 0179 70010000 		.4byte	.LFB3
+ 703 017d 5C020000 		.4byte	.LFE3
+ 704 0181 A8000000 		.4byte	.LLST3
+ 705 0185 CD010000 		.4byte	0x1cd
+ 706 0189 0A       		.uleb128 0xa
+ 707 018a 6300     		.ascii	"c\000"
+ 708 018c 01       		.byte	0x1
+ 709 018d 79       		.byte	0x79
+ 710 018e BD000000 		.4byte	0xbd
+ 711 0192 02       		.byte	0x2
+ 712 0193 91       		.byte	0x91
+ 713 0194 6F       		.sleb128 -17
+ 714 0195 0A       		.uleb128 0xa
+ 715 0196 6900     		.ascii	"i\000"
+ 716 0198 01       		.byte	0x1
+ 717 0199 7A       		.byte	0x7a
+ 718 019a 53000000 		.4byte	0x53
+ 719 019e 02       		.byte	0x2
+ 720 019f 91       		.byte	0x91
+ 721 01a0 74       		.sleb128 -12
+ 722 01a1 07       		.uleb128 0x7
+ 723 01a2 14010000 		.4byte	.LASF19
+ 724 01a6 01       		.byte	0x1
+ 725 01a7 7B       		.byte	0x7b
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 17
+
+
+ 726 01a8 53000000 		.4byte	0x53
+ 727 01ac 02       		.byte	0x2
+ 728 01ad 91       		.byte	0x91
+ 729 01ae 70       		.sleb128 -16
+ 730 01af 07       		.uleb128 0x7
+ 731 01b0 6F000000 		.4byte	.LASF20
+ 732 01b4 01       		.byte	0x1
+ 733 01b5 7C       		.byte	0x7c
+ 734 01b6 CD010000 		.4byte	0x1cd
+ 735 01ba 02       		.byte	0x2
+ 736 01bb 91       		.byte	0x91
+ 737 01bc 4C       		.sleb128 -52
+ 738 01bd 07       		.uleb128 0x7
+ 739 01be 8C000000 		.4byte	.LASF14
+ 740 01c2 01       		.byte	0x1
+ 741 01c3 7C       		.byte	0x7c
+ 742 01c4 DD010000 		.4byte	0x1dd
+ 743 01c8 03       		.byte	0x3
+ 744 01c9 91       		.byte	0x91
+ 745 01ca CC7E     		.sleb128 -180
+ 746 01cc 00       		.byte	0x0
+ 747 01cd 0C       		.uleb128 0xc
+ 748 01ce 2C000000 		.4byte	0x2c
+ 749 01d2 DD010000 		.4byte	0x1dd
+ 750 01d6 0D       		.uleb128 0xd
+ 751 01d7 7A000000 		.4byte	0x7a
+ 752 01db 1F       		.byte	0x1f
+ 753 01dc 00       		.byte	0x0
+ 754 01dd 0C       		.uleb128 0xc
+ 755 01de 2C000000 		.4byte	0x2c
+ 756 01e2 ED010000 		.4byte	0x1ed
+ 757 01e6 0D       		.uleb128 0xd
+ 758 01e7 7A000000 		.4byte	0x7a
+ 759 01eb 7F       		.byte	0x7f
+ 760 01ec 00       		.byte	0x0
+ 761 01ed 0E       		.uleb128 0xe
+ 762 01ee 1D010000 		.4byte	.LASF25
+ 763 01f2 01       		.byte	0x1
+ 764 01f3 22       		.byte	0x22
+ 765 01f4 FF010000 		.4byte	0x1ff
+ 766 01f8 01       		.byte	0x1
+ 767 01f9 05       		.byte	0x5
+ 768 01fa 03       		.byte	0x3
+ 769 01fb 00000000 		.4byte	str_out
+ 770 01ff 0F       		.uleb128 0xf
+ 771 0200 04020000 		.4byte	0x204
+ 772 0204 08       		.uleb128 0x8
+ 773 0205 04       		.byte	0x4
+ 774 0206 0A020000 		.4byte	0x20a
+ 775 020a 0F       		.uleb128 0xf
+ 776 020b BD000000 		.4byte	0xbd
+ 777 020f 00       		.byte	0x0
+ 778              		.section	.debug_abbrev
+ 779 0000 01       		.uleb128 0x1
+ 780 0001 11       		.uleb128 0x11
+ 781 0002 01       		.byte	0x1
+ 782 0003 25       		.uleb128 0x25
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 18
+
+
+ 783 0004 0E       		.uleb128 0xe
+ 784 0005 13       		.uleb128 0x13
+ 785 0006 0B       		.uleb128 0xb
+ 786 0007 03       		.uleb128 0x3
+ 787 0008 0E       		.uleb128 0xe
+ 788 0009 1B       		.uleb128 0x1b
+ 789 000a 0E       		.uleb128 0xe
+ 790 000b 11       		.uleb128 0x11
+ 791 000c 01       		.uleb128 0x1
+ 792 000d 12       		.uleb128 0x12
+ 793 000e 01       		.uleb128 0x1
+ 794 000f 10       		.uleb128 0x10
+ 795 0010 06       		.uleb128 0x6
+ 796 0011 00       		.byte	0x0
+ 797 0012 00       		.byte	0x0
+ 798 0013 02       		.uleb128 0x2
+ 799 0014 24       		.uleb128 0x24
+ 800 0015 00       		.byte	0x0
+ 801 0016 0B       		.uleb128 0xb
+ 802 0017 0B       		.uleb128 0xb
+ 803 0018 3E       		.uleb128 0x3e
+ 804 0019 0B       		.uleb128 0xb
+ 805 001a 03       		.uleb128 0x3
+ 806 001b 0E       		.uleb128 0xe
+ 807 001c 00       		.byte	0x0
+ 808 001d 00       		.byte	0x0
+ 809 001e 03       		.uleb128 0x3
+ 810 001f 16       		.uleb128 0x16
+ 811 0020 00       		.byte	0x0
+ 812 0021 03       		.uleb128 0x3
+ 813 0022 0E       		.uleb128 0xe
+ 814 0023 3A       		.uleb128 0x3a
+ 815 0024 0B       		.uleb128 0xb
+ 816 0025 3B       		.uleb128 0x3b
+ 817 0026 0B       		.uleb128 0xb
+ 818 0027 49       		.uleb128 0x49
+ 819 0028 13       		.uleb128 0x13
+ 820 0029 00       		.byte	0x0
+ 821 002a 00       		.byte	0x0
+ 822 002b 04       		.uleb128 0x4
+ 823 002c 24       		.uleb128 0x24
+ 824 002d 00       		.byte	0x0
+ 825 002e 0B       		.uleb128 0xb
+ 826 002f 0B       		.uleb128 0xb
+ 827 0030 3E       		.uleb128 0x3e
+ 828 0031 0B       		.uleb128 0xb
+ 829 0032 03       		.uleb128 0x3
+ 830 0033 08       		.uleb128 0x8
+ 831 0034 00       		.byte	0x0
+ 832 0035 00       		.byte	0x0
+ 833 0036 05       		.uleb128 0x5
+ 834 0037 2E       		.uleb128 0x2e
+ 835 0038 01       		.byte	0x1
+ 836 0039 3F       		.uleb128 0x3f
+ 837 003a 0C       		.uleb128 0xc
+ 838 003b 03       		.uleb128 0x3
+ 839 003c 0E       		.uleb128 0xe
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 19
+
+
+ 840 003d 3A       		.uleb128 0x3a
+ 841 003e 0B       		.uleb128 0xb
+ 842 003f 3B       		.uleb128 0x3b
+ 843 0040 0B       		.uleb128 0xb
+ 844 0041 27       		.uleb128 0x27
+ 845 0042 0C       		.uleb128 0xc
+ 846 0043 11       		.uleb128 0x11
+ 847 0044 01       		.uleb128 0x1
+ 848 0045 12       		.uleb128 0x12
+ 849 0046 01       		.uleb128 0x1
+ 850 0047 40       		.uleb128 0x40
+ 851 0048 06       		.uleb128 0x6
+ 852 0049 01       		.uleb128 0x1
+ 853 004a 13       		.uleb128 0x13
+ 854 004b 00       		.byte	0x0
+ 855 004c 00       		.byte	0x0
+ 856 004d 06       		.uleb128 0x6
+ 857 004e 05       		.uleb128 0x5
+ 858 004f 00       		.byte	0x0
+ 859 0050 03       		.uleb128 0x3
+ 860 0051 08       		.uleb128 0x8
+ 861 0052 3A       		.uleb128 0x3a
+ 862 0053 0B       		.uleb128 0xb
+ 863 0054 3B       		.uleb128 0x3b
+ 864 0055 0B       		.uleb128 0xb
+ 865 0056 49       		.uleb128 0x49
+ 866 0057 13       		.uleb128 0x13
+ 867 0058 02       		.uleb128 0x2
+ 868 0059 0A       		.uleb128 0xa
+ 869 005a 00       		.byte	0x0
+ 870 005b 00       		.byte	0x0
+ 871 005c 07       		.uleb128 0x7
+ 872 005d 34       		.uleb128 0x34
+ 873 005e 00       		.byte	0x0
+ 874 005f 03       		.uleb128 0x3
+ 875 0060 0E       		.uleb128 0xe
+ 876 0061 3A       		.uleb128 0x3a
+ 877 0062 0B       		.uleb128 0xb
+ 878 0063 3B       		.uleb128 0x3b
+ 879 0064 0B       		.uleb128 0xb
+ 880 0065 49       		.uleb128 0x49
+ 881 0066 13       		.uleb128 0x13
+ 882 0067 02       		.uleb128 0x2
+ 883 0068 0A       		.uleb128 0xa
+ 884 0069 00       		.byte	0x0
+ 885 006a 00       		.byte	0x0
+ 886 006b 08       		.uleb128 0x8
+ 887 006c 0F       		.uleb128 0xf
+ 888 006d 00       		.byte	0x0
+ 889 006e 0B       		.uleb128 0xb
+ 890 006f 0B       		.uleb128 0xb
+ 891 0070 49       		.uleb128 0x49
+ 892 0071 13       		.uleb128 0x13
+ 893 0072 00       		.byte	0x0
+ 894 0073 00       		.byte	0x0
+ 895 0074 09       		.uleb128 0x9
+ 896 0075 05       		.uleb128 0x5
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 20
+
+
+ 897 0076 00       		.byte	0x0
+ 898 0077 03       		.uleb128 0x3
+ 899 0078 0E       		.uleb128 0xe
+ 900 0079 3A       		.uleb128 0x3a
+ 901 007a 0B       		.uleb128 0xb
+ 902 007b 3B       		.uleb128 0x3b
+ 903 007c 0B       		.uleb128 0xb
+ 904 007d 49       		.uleb128 0x49
+ 905 007e 13       		.uleb128 0x13
+ 906 007f 02       		.uleb128 0x2
+ 907 0080 0A       		.uleb128 0xa
+ 908 0081 00       		.byte	0x0
+ 909 0082 00       		.byte	0x0
+ 910 0083 0A       		.uleb128 0xa
+ 911 0084 34       		.uleb128 0x34
+ 912 0085 00       		.byte	0x0
+ 913 0086 03       		.uleb128 0x3
+ 914 0087 08       		.uleb128 0x8
+ 915 0088 3A       		.uleb128 0x3a
+ 916 0089 0B       		.uleb128 0xb
+ 917 008a 3B       		.uleb128 0x3b
+ 918 008b 0B       		.uleb128 0xb
+ 919 008c 49       		.uleb128 0x49
+ 920 008d 13       		.uleb128 0x13
+ 921 008e 02       		.uleb128 0x2
+ 922 008f 0A       		.uleb128 0xa
+ 923 0090 00       		.byte	0x0
+ 924 0091 00       		.byte	0x0
+ 925 0092 0B       		.uleb128 0xb
+ 926 0093 2E       		.uleb128 0x2e
+ 927 0094 01       		.byte	0x1
+ 928 0095 3F       		.uleb128 0x3f
+ 929 0096 0C       		.uleb128 0xc
+ 930 0097 03       		.uleb128 0x3
+ 931 0098 0E       		.uleb128 0xe
+ 932 0099 3A       		.uleb128 0x3a
+ 933 009a 0B       		.uleb128 0xb
+ 934 009b 3B       		.uleb128 0x3b
+ 935 009c 0B       		.uleb128 0xb
+ 936 009d 27       		.uleb128 0x27
+ 937 009e 0C       		.uleb128 0xc
+ 938 009f 49       		.uleb128 0x49
+ 939 00a0 13       		.uleb128 0x13
+ 940 00a1 11       		.uleb128 0x11
+ 941 00a2 01       		.uleb128 0x1
+ 942 00a3 12       		.uleb128 0x12
+ 943 00a4 01       		.uleb128 0x1
+ 944 00a5 40       		.uleb128 0x40
+ 945 00a6 06       		.uleb128 0x6
+ 946 00a7 01       		.uleb128 0x1
+ 947 00a8 13       		.uleb128 0x13
+ 948 00a9 00       		.byte	0x0
+ 949 00aa 00       		.byte	0x0
+ 950 00ab 0C       		.uleb128 0xc
+ 951 00ac 01       		.uleb128 0x1
+ 952 00ad 01       		.byte	0x1
+ 953 00ae 49       		.uleb128 0x49
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 21
+
+
+ 954 00af 13       		.uleb128 0x13
+ 955 00b0 01       		.uleb128 0x1
+ 956 00b1 13       		.uleb128 0x13
+ 957 00b2 00       		.byte	0x0
+ 958 00b3 00       		.byte	0x0
+ 959 00b4 0D       		.uleb128 0xd
+ 960 00b5 21       		.uleb128 0x21
+ 961 00b6 00       		.byte	0x0
+ 962 00b7 49       		.uleb128 0x49
+ 963 00b8 13       		.uleb128 0x13
+ 964 00b9 2F       		.uleb128 0x2f
+ 965 00ba 0B       		.uleb128 0xb
+ 966 00bb 00       		.byte	0x0
+ 967 00bc 00       		.byte	0x0
+ 968 00bd 0E       		.uleb128 0xe
+ 969 00be 34       		.uleb128 0x34
+ 970 00bf 00       		.byte	0x0
+ 971 00c0 03       		.uleb128 0x3
+ 972 00c1 0E       		.uleb128 0xe
+ 973 00c2 3A       		.uleb128 0x3a
+ 974 00c3 0B       		.uleb128 0xb
+ 975 00c4 3B       		.uleb128 0x3b
+ 976 00c5 0B       		.uleb128 0xb
+ 977 00c6 49       		.uleb128 0x49
+ 978 00c7 13       		.uleb128 0x13
+ 979 00c8 3F       		.uleb128 0x3f
+ 980 00c9 0C       		.uleb128 0xc
+ 981 00ca 02       		.uleb128 0x2
+ 982 00cb 0A       		.uleb128 0xa
+ 983 00cc 00       		.byte	0x0
+ 984 00cd 00       		.byte	0x0
+ 985 00ce 0F       		.uleb128 0xf
+ 986 00cf 26       		.uleb128 0x26
+ 987 00d0 00       		.byte	0x0
+ 988 00d1 49       		.uleb128 0x49
+ 989 00d2 13       		.uleb128 0x13
+ 990 00d3 00       		.byte	0x0
+ 991 00d4 00       		.byte	0x0
+ 992 00d5 00       		.byte	0x0
+ 993              		.section	.debug_pubnames,"",%progbits
+ 994 0000 49000000 		.4byte	0x49
+ 995 0004 0200     		.2byte	0x2
+ 996 0006 00000000 		.4byte	.Ldebug_info0
+ 997 000a 10020000 		.4byte	0x210
+ 998 000e 81000000 		.4byte	0x81
+ 999 0012 6462675F 		.ascii	"dbg_print\000"
+ 999      7072696E 
+ 999      7400
+ 1000 001c C4000000 		.4byte	0xc4
+ 1001 0020 636F6E63 		.ascii	"concat_str\000"
+ 1001      61745F73 
+ 1001      747200
+ 1002 002b 20010000 		.4byte	0x120
+ 1003 002f 69746F73 		.ascii	"itos\000"
+ 1003      00
+ 1004 0034 6C010000 		.4byte	0x16c
+ 1005 0038 6D61696E 		.ascii	"main\000"
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 22
+
+
+ 1005      00
+ 1006 003d ED010000 		.4byte	0x1ed
+ 1007 0041 7374725F 		.ascii	"str_out\000"
+ 1007      6F757400 
+ 1008 0049 00000000 		.4byte	0x0
+ 1009              		.section	.debug_pubtypes,"",%progbits
+ 1010 0000 27000000 		.4byte	0x27
+ 1011 0004 0200     		.2byte	0x2
+ 1012 0006 00000000 		.4byte	.Ldebug_info0
+ 1013 000a 10020000 		.4byte	0x210
+ 1014 000e 2C000000 		.4byte	0x2c
+ 1015 0012 75696E74 		.ascii	"uint8_t\000"
+ 1015      385F7400 
+ 1016 001a 53000000 		.4byte	0x53
+ 1017 001e 75696E74 		.ascii	"uint32_t\000"
+ 1017      33325F74 
+ 1017      00
+ 1018 0027 00000000 		.4byte	0x0
+ 1019              		.section	.debug_aranges,"",%progbits
+ 1020 0000 1C000000 		.4byte	0x1c
+ 1021 0004 0200     		.2byte	0x2
+ 1022 0006 00000000 		.4byte	.Ldebug_info0
+ 1023 000a 04       		.byte	0x4
+ 1024 000b 00       		.byte	0x0
+ 1025 000c 0000     		.2byte	0x0
+ 1026 000e 0000     		.2byte	0x0
+ 1027 0010 00000000 		.4byte	.Ltext0
+ 1028 0014 5C020000 		.4byte	.Letext0-.Ltext0
+ 1029 0018 00000000 		.4byte	0x0
+ 1030 001c 00000000 		.4byte	0x0
+ 1031              		.section	.debug_str,"MS",%progbits,1
+ 1032              	.LASF8:
+ 1033 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1033      206C6F6E 
+ 1033      6720696E 
+ 1033      7400
+ 1034              	.LASF12:
+ 1035 000e 6462675F 		.ascii	"dbg_print\000"
+ 1035      7072696E 
+ 1035      7400
+ 1036              	.LASF21:
+ 1037 0018 474E5520 		.ascii	"GNU C 4.5.2\000"
+ 1037      4320342E 
+ 1037      352E3200 
+ 1038              	.LASF13:
+ 1039 0024 636F6E63 		.ascii	"concat_str\000"
+ 1039      61745F73 
+ 1039      747200
+ 1040              	.LASF23:
+ 1041 002f 643A5C77 		.ascii	"d:\\workspace\\ovp\\cortex_m3_test\000"
+ 1041      6F726B73 
+ 1041      70616365 
+ 1041      5C6F7670 
+ 1041      5C636F72 
+ 1042              	.LASF1:
+ 1043 004f 756E7369 		.ascii	"unsigned char\000"
+ 1043      676E6564 
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 23
+
+
+ 1043      20636861 
+ 1043      7200
+ 1044              	.LASF7:
+ 1045 005d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1045      20756E73 
+ 1045      69676E65 
+ 1045      6420696E 
+ 1045      7400
+ 1046              	.LASF20:
+ 1047 006f 74656D70 		.ascii	"temp\000"
+ 1047      00
+ 1048              	.LASF3:
+ 1049 0074 73686F72 		.ascii	"short unsigned int\000"
+ 1049      7420756E 
+ 1049      7369676E 
+ 1049      65642069 
+ 1049      6E7400
+ 1050              	.LASF18:
+ 1051 0087 69746F73 		.ascii	"itos\000"
+ 1051      00
+ 1052              	.LASF14:
+ 1053 008c 62756666 		.ascii	"buff\000"
+ 1053      00
+ 1054              	.LASF15:
+ 1055 0091 73747231 		.ascii	"str1\000"
+ 1055      00
+ 1056              	.LASF16:
+ 1057 0096 73747232 		.ascii	"str2\000"
+ 1057      00
+ 1058              	.LASF24:
+ 1059 009b 6D61696E 		.ascii	"main\000"
+ 1059      00
+ 1060              	.LASF10:
+ 1061 00a0 756E7369 		.ascii	"unsigned int\000"
+ 1061      676E6564 
+ 1061      20696E74 
+ 1061      00
+ 1062              	.LASF9:
+ 1063 00ad 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1063      206C6F6E 
+ 1063      6720756E 
+ 1063      7369676E 
+ 1063      65642069 
+ 1064              	.LASF5:
+ 1065 00c4 75696E74 		.ascii	"uint8_t\000"
+ 1065      385F7400 
+ 1066              	.LASF22:
+ 1067 00cc 636F7274 		.ascii	"cortex_m3_test_app.c\000"
+ 1067      65785F6D 
+ 1067      335F7465 
+ 1067      73745F61 
+ 1067      70702E63 
+ 1068              	.LASF11:
+ 1069 00e1 63686172 		.ascii	"char\000"
+ 1069      00
+ 1070              	.LASF17:
+ 1071 00e6 696E6465 		.ascii	"index\000"
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 24
+
+
+ 1071      7800
+ 1072              	.LASF2:
+ 1073 00ec 73686F72 		.ascii	"short int\000"
+ 1073      7420696E 
+ 1073      7400
+ 1074              	.LASF6:
+ 1075 00f6 75696E74 		.ascii	"uint32_t\000"
+ 1075      33325F74 
+ 1075      00
+ 1076              	.LASF4:
+ 1077 00ff 6C6F6E67 		.ascii	"long int\000"
+ 1077      20696E74 
+ 1077      00
+ 1078              	.LASF0:
+ 1079 0108 7369676E 		.ascii	"signed char\000"
+ 1079      65642063 
+ 1079      68617200 
+ 1080              	.LASF19:
+ 1081 0114 63686172 		.ascii	"char_cnt\000"
+ 1081      5F636E74 
+ 1081      00
+ 1082              	.LASF25:
+ 1083 011d 7374725F 		.ascii	"str_out\000"
+ 1083      6F757400 
+ 1084              		.ident	"GCC: (GNU) 4.5.2"
+ARM GAS  C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 cortex_m3_test_app.c
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:31     .rodata:00000010 str_out
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:25     .rodata:00000000 $d
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:34     .text:00000000 $t
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:39     .text:00000000 dbg_print
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:106    .text:00000060 concat_str
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:206    .text:000000f0 itos
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:280    .rodata:00000014 .LC1
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:283    .rodata:00000034 .LC2
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:286    .rodata:00000060 .LC3
+C:\DOCUME~1\uidc1485\LOCALS~1\Temp\cctm9aAb.s:294    .text:00000170 main
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

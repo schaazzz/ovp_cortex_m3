@@ -1,0 +1,100 @@
+ARM GAS  ..\..\start.s 			page 1
+
+
+   1              	/**
+   2              	 * Startup assembler file for the Cortex-M3 test platform.
+   3              	 *
+   4              	 * Author: Shahzeb Ihsan
+   5              	 * Version: 1.0
+   6              	 * See: echo.c
+   7              	 */
+   8              	
+   9              	   /* Thumb-2 instructions are only supported in unified syntax mode. */
+  10              	   .syntax unified
+  11              	
+  12              	   /* Vector table definition. */
+  13              	   .section "__cs3_int_vectors"
+  14 0000 00000000 	.long __cs3_stack                   /* Top of the Stack */
+  15 0004 00000000 	.long  reset_handler                /* Reset handler */
+  16 0008 00000000 	.long  nmi_handler                  /* Non-maskable interrupt handler */
+  17 000c 00000000 	.long  hard_fault_handler           /* Hard fault handler */
+  18 0010 00000000 	.long  mpu_fault_handler            /* Memory protection unit fault handler */
+  19 0014 00000000 	.long  bus_fault_handler            /* Bus fault handler */
+  20 0018 00000000 	.long  usage_fault_handler          /* Usage fault handler */
+  21 001c 00000000 	.long  0                            /* Reserved */
+  22 0020 00000000 	.long  0                            /* Reserved */
+  23 0024 00000000 	.long  0                            /* Reserved */
+  24 0028 00000000 	.long  0                            /* Reserved */
+  25 002c 00000000 	.long  svc_handler                  /* Supervisor call handler */
+  26 0030 00000000 	.long  debug_mon_handler            /* Debug monitor handler */
+  27 0034 00000000 	.long  0                            /* Reserved */
+  28 0038 00000000 	.long  pendsv_handler               /* PendSV handler */
+  29 003c 00000000 	.long  sys_tick_handler             /* System tick handler */
+  30              	
+  31              	   /* Vendor specific interrupts. */
+  32              	   /*  ---- Not implemented --- */
+  33              	
+  34              	   /* Program section. */
+  35              	   .section ".text"
+  36              	
+  37              	   /* Declare as thumb function, otherwise it won't be linked correctly. */
+  38              	   .thumb_func
+  39              	
+  40              	   /* Export the symbol so the linker can see this. */
+  41              	   .global reset_handler
+  42              	reset_handler:
+  43              	   /* Jump to main(), a thumb function. */
+  44 0000 0148     	   ldr      r0, =main
+  45 0002 8047     	   blx      r0
+  46              	
+  47              	   /* If main() ever exits, the "_exit" label will end the simulation. */
+  48              	 .global _exit
+  49              	_exit:
+  50 0004 FEE7     	   B        .
+  51              	
+  52              	   /* Dummy interrupt handlers. */
+  53              	   .thumb_func
+  54              	nmi_handler:
+  55              	   .thumb_func
+  56              	hard_fault_handler:
+  57              	   .thumb_func
+ARM GAS  ..\..\start.s 			page 2
+
+
+  58              	mpu_fault_handler:
+  59              	   .thumb_func
+  60              	bus_fault_handler:
+  61              	   .thumb_func
+  62              	usage_fault_handler:
+  63              	   .thumb_func
+  64              	svc_handler:
+  65              	   .thumb_func
+  66              	debug_mon_handler:
+  67              	   .thumb_func
+  68              	pendsv_handler:
+  69              	   .thumb_func
+  70              	sys_tick_handler:
+  71              	   /* Loop here forever. */
+  72 0006 FEE70000 	   B        .
+  72      0000
+ARM GAS  ..\..\start.s 			page 3
+
+
+DEFINED SYMBOLS
+       ..\..\start.s:42     .text:00000000 reset_handler
+       ..\..\start.s:54     .text:00000006 nmi_handler
+       ..\..\start.s:56     .text:00000006 hard_fault_handler
+       ..\..\start.s:58     .text:00000006 mpu_fault_handler
+       ..\..\start.s:60     .text:00000006 bus_fault_handler
+       ..\..\start.s:62     .text:00000006 usage_fault_handler
+       ..\..\start.s:64     .text:00000006 svc_handler
+       ..\..\start.s:66     .text:00000006 debug_mon_handler
+       ..\..\start.s:68     .text:00000006 pendsv_handler
+       ..\..\start.s:70     .text:00000006 sys_tick_handler
+       ..\..\start.s:44     .text:00000000 $t
+       ..\..\start.s:49     .text:00000004 _exit
+       ..\..\start.s:72     .text:00000008 $d
+
+UNDEFINED SYMBOLS
+__cs3_stack
+main

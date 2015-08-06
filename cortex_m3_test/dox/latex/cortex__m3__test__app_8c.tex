@@ -1,0 +1,143 @@
+\hypertarget{cortex__m3__test__app_8c}{
+\section{cortex\_\-m3\_\-test\_\-app.c File Reference}
+\label{cortex__m3__test__app_8c}\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_aa501d94aad5260161a3f0b89ec827e92}{UART\_\-BASE}~((unsigned char $\ast$) 0x20000000)
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_a94819798657725e367cc3337eaf052e4}{UARTDR}~((volatile unsigned char $\ast$) (UART\_\-BASE + 0))
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_a878086a728f7230c49be91e7a198576a}{UARTFR}~((unsigned char $\ast$) (UART\_\-BASE + 0x18))
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_a3594f8cb4b94434db82f8dd60023b932}{UARTLCR\_\-H}~((unsigned char $\ast$) (UART\_\-BASE + 0x2C))
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_a7d646ecbd69ef20a7f248cd1ec17b1f9}{UARTCR}~((unsigned char $\ast$) (UART\_\-BASE + 0x30))
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_a8e45e244b2e82cd5af8ab8af5665dded}{UARTRIS}~((unsigned char $\ast$) (UART\_\-BASE + 0x3C))
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_ad809e52be45d0696aec55d60a19f469b}{UARTIMSC}~((unsigned char $\ast$) (UART\_\-BASE + 0x38))
+\item 
+\#define \hyperlink{cortex__m3__test__app_8c_ae14a7e46099d5e0ff11e805c369c34e6}{UARTMIS}~((unsigned char $\ast$) (UART\_\-BASE + 0x40))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{cortex__m3__test__app_8c_a6288eba0f8e8ad3ab1544ad731eb7667}{main} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Demo application for the Cortex-\/M3 test platform.
+
+\begin{DoxyAuthor}{Author}
+Shahzeb Ihsan 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0 
+\end{DoxyVersion}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{cortex__m3__test__platform_8c}{cortex\_\-m3\_\-test\_\-platform.c} 
+\end{DoxySeeAlso}
+
+
+Definition in file \hyperlink{cortex__m3__test__app_8c_source}{cortex\_\-m3\_\-test\_\-app.c}.
+
+
+
+\subsection{Define Documentation}
+\hypertarget{cortex__m3__test__app_8c_aa501d94aad5260161a3f0b89ec827e92}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UART\_\-BASE@{UART\_\-BASE}}
+\index{UART\_\-BASE@{UART\_\-BASE}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UART\_\-BASE}]{\setlength{\rightskip}{0pt plus 5cm}\#define UART\_\-BASE~((unsigned char $\ast$) 0x20000000)}}
+\label{cortex__m3__test__app_8c_aa501d94aad5260161a3f0b89ec827e92}
+
+
+Definition at line 16 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_a7d646ecbd69ef20a7f248cd1ec17b1f9}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTCR@{UARTCR}}
+\index{UARTCR@{UARTCR}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTCR}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTCR~((unsigned char $\ast$) (UART\_\-BASE + 0x30))}}
+\label{cortex__m3__test__app_8c_a7d646ecbd69ef20a7f248cd1ec17b1f9}
+
+
+Definition at line 20 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_a94819798657725e367cc3337eaf052e4}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTDR@{UARTDR}}
+\index{UARTDR@{UARTDR}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTDR~((volatile unsigned char $\ast$) (UART\_\-BASE + 0))}}
+\label{cortex__m3__test__app_8c_a94819798657725e367cc3337eaf052e4}
+
+
+Definition at line 17 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_a878086a728f7230c49be91e7a198576a}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTFR@{UARTFR}}
+\index{UARTFR@{UARTFR}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTFR}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTFR~((unsigned char $\ast$) (UART\_\-BASE + 0x18))}}
+\label{cortex__m3__test__app_8c_a878086a728f7230c49be91e7a198576a}
+
+
+Definition at line 18 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_ad809e52be45d0696aec55d60a19f469b}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTIMSC@{UARTIMSC}}
+\index{UARTIMSC@{UARTIMSC}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTIMSC}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTIMSC~((unsigned char $\ast$) (UART\_\-BASE + 0x38))}}
+\label{cortex__m3__test__app_8c_ad809e52be45d0696aec55d60a19f469b}
+
+
+Definition at line 22 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_a3594f8cb4b94434db82f8dd60023b932}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTLCR\_\-H@{UARTLCR\_\-H}}
+\index{UARTLCR\_\-H@{UARTLCR\_\-H}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTLCR\_\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTLCR\_\-H~((unsigned char $\ast$) (UART\_\-BASE + 0x2C))}}
+\label{cortex__m3__test__app_8c_a3594f8cb4b94434db82f8dd60023b932}
+
+
+Definition at line 19 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_ae14a7e46099d5e0ff11e805c369c34e6}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTMIS@{UARTMIS}}
+\index{UARTMIS@{UARTMIS}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTMIS}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTMIS~((unsigned char $\ast$) (UART\_\-BASE + 0x40))}}
+\label{cortex__m3__test__app_8c_ae14a7e46099d5e0ff11e805c369c34e6}
+
+
+Definition at line 23 of file cortex\_\-m3\_\-test\_\-app.c.
+
+\hypertarget{cortex__m3__test__app_8c_a8e45e244b2e82cd5af8ab8af5665dded}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!UARTRIS@{UARTRIS}}
+\index{UARTRIS@{UARTRIS}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{UARTRIS}]{\setlength{\rightskip}{0pt plus 5cm}\#define UARTRIS~((unsigned char $\ast$) (UART\_\-BASE + 0x3C))}}
+\label{cortex__m3__test__app_8c_a8e45e244b2e82cd5af8ab8af5665dded}
+
+
+Definition at line 21 of file cortex\_\-m3\_\-test\_\-app.c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{cortex__m3__test__app_8c_a6288eba0f8e8ad3ab1544ad731eb7667}{
+\index{cortex\_\-m3\_\-test\_\-app.c@{cortex\_\-m3\_\-test\_\-app.c}!main@{main}}
+\index{main@{main}!cortex_m3_test_app.c@{cortex\_\-m3\_\-test\_\-app.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}void main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{cortex__m3__test__app_8c_a6288eba0f8e8ad3ab1544ad731eb7667}
+
+
+UARTLCR\_\-H = 0x0070; UARTIMSC = 0x1F; printf(\char`\"{}$\backslash$r$\backslash$nUARTLCR\_\-H: 0x\%X\char`\"{}, $\ast$UARTLCR\_\-H); printf(\char`\"{}$\backslash$r$\backslash$nUARTCR: 0x\%X\char`\"{}, $\ast$UARTCR); printf(\char`\"{}$\backslash$r$\backslash$nUARTIMSC: 0x\%X\char`\"{}, $\ast$UARTIMSC); printf(\char`\"{}$\backslash$r$\backslash$nUARTMIS: 0x\%X\char`\"{}, $\ast$UARTMIS); 
+
+
+
+Definition at line 24 of file cortex\_\-m3\_\-test\_\-app.c.
+

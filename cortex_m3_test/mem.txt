@@ -1,0 +1,61 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.flash          0x00000000       0x94
+ *(__cs3_entry)
+ __cs3_entry    0x00000000       0x40 start.o
+ *(.text .text.*)
+ .text          0x00000040        0xc start.o
+                0x00000040                reset_handler
+                0x00000044                _exit
+ .text          0x0000004c       0x48 cortex_m3_test_app.o
+                0x0000004c                main
+ *(.rodata .rodata.*)
+                0x00000094                __sidata = .
+
+.glue_7         0x00000094        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00000094        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00000094        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00000094        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.data_at_ram    0x10000000        0x0 load address 0x00000094
+                0x10000000                __sdata = .
+ *(.data .data.*)
+ .data          0x10000000        0x0 start.o
+ .data          0x10000000        0x0 cortex_m3_test_app.o
+                0x10000000                __edata = .
+
+.ram            0x10000000        0x0 load address 0x00000094
+                0x10000000                __sbss = .
+ *(.bss .bss.*)
+ .bss           0x10000000        0x0 start.o
+ .bss           0x10000000        0x0 cortex_m3_test_app.o
+                0x10000000                __ebss = .
+                0x10008000                __cs3_stack = 0x10008000
+LOAD start.o
+LOAD cortex_m3_test_app.o
+OUTPUT(cortex_m3_test_app.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x27
+ .ARM.attributes
+                0x00000000       0x1b start.o
+ .ARM.attributes
+                0x0000001b       0x2b cortex_m3_test_app.o
+
+.comment        0x00000000       0x2a
+ .comment       0x00000000       0x2a cortex_m3_test_app.o
+                                 0x2b (size before relaxing)

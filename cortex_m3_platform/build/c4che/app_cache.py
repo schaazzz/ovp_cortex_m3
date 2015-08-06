@@ -1,0 +1,8 @@
+BINDIR = 'C:\\docume~1\\uidc1485\\locals~1\\temp/bin'
+LIBDIR = 'C:\\docume~1\\uidc1485\\locals~1\\temp/lib'
+PREFIX = 'C:\\docume~1\\uidc1485\\locals~1\\temp'
+aflags = '-mthumb -march=armv7-m -mlittle-endian -ahls -mapcs-32 -o'
+asm = 'C:\\dev\\yagarto\\bin\\arm-none-eabi-as.exe'
+cflags = '-mthumb -march=armv7-m -mfix-cortex-m3-ldrd -mlittle-endian -Wa,-ahls, -L -g -ggdb -c -O0 -o'
+compiler = 'C:\\dev\\yagarto\\bin\\arm-none-eabi-gcc.exe'
+linker = 'C:\\dev\\yagarto\\bin\\arm-none-eabi-ld.exe'

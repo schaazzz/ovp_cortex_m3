@@ -1,0 +1,254 @@
+\hypertarget{cortex__m3__test__platform_8c}{
+\section{cortex\_\-m3\_\-test\_\-platform.c File Reference}
+\label{cortex__m3__test__platform_8c}\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+}
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include \char`\"{}icm/icmCpuManager.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_a66cd4ee580a97c809c231eb147c7d3fa}{SIM\_\-ATTRS}~(ICM\_\-ATTR\_\-RELAXED\_\-SCHED)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_a30f5fe1fdd6ea23039e8fd5729a1653b}{ARGS\_\-MIN}~(2)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_ac2a83118af3a0c8328fef5041317066f}{ARGS\_\-MAX}~(3)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_acef372fcb503aadbe8c372a23acaa521}{ARGS\_\-APP}~(1)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_a7c9d515490d6647cdef24309fe73af79}{ARGS\_\-VAR}~(2)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_a45f28f7499423c46617a069f316492b5}{UART\_\-USE\_\-SOCKETS}~(0)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_aa834f9971a4fce6e7be7dc1188ba5cd8}{UART\_\-USE\_\-LOGFILE}~(0)
+\item 
+\#define \hyperlink{cortex__m3__test__platform_8c_a21357be44799ea7df74ee57fbdc01f11}{UART\_\-USE\_\-STDOUT}~(1)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{cortex__m3__test__platform_8c_a9d09353ebb8a010f64e86ae867660816}{parse\_\-args} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Parse command-\/line arguments. \item\end{DoxyCompactList}\item 
+static void \hyperlink{cortex__m3__test__platform_8c_a73d4965df52a1202cfb5ea6975343949}{create\_\-platform} (icmProcessorP $\ast$cpu)
+\begin{DoxyCompactList}\small\item\em Create the platform. \item\end{DoxyCompactList}\item 
+int \hyperlink{cortex__m3__test__platform_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Simulation entry point. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{cortex__m3__test__platform_8c_aef1bd6ad890a110b466cb0e8088507a2}{usage} = \char`\"{}\mbox{[}application\mbox{]} \mbox{[}\hyperlink{cortex__m3__test__platform_8c_a850c6332f7c8a964cd52555c07b410ad}{variant} (optional)\mbox{]}\char`\"{}
+\item 
+char $\ast$ \hyperlink{cortex__m3__test__platform_8c_a33c5b7a1a2460b52fd523966dd072eaa}{application}
+\begin{DoxyCompactList}\small\item\em Application to load (variable set by command-\/line argument). \item\end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{cortex__m3__test__platform_8c_a850c6332f7c8a964cd52555c07b410ad}{variant} = \char`\"{}Cortex-\/M3\char`\"{}
+\begin{DoxyCompactList}\small\item\em Processor variant, default set to Cortex-\/M3 (variable set by command-\/line argument). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Test OVP simulation platform which contains a Cortex-\/M3 processor, a single memory for code and data, and an ARM PrimeCell PL011 UART.
+
+\begin{DoxyAuthor}{Author}
+Shahzeb Ihsan 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0 
+\end{DoxyVersion}
+
+
+Definition in file \hyperlink{cortex__m3__test__platform_8c_source}{cortex\_\-m3\_\-test\_\-platform.c}.
+
+
+
+\subsection{Define Documentation}
+\hypertarget{cortex__m3__test__platform_8c_acef372fcb503aadbe8c372a23acaa521}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!ARGS\_\-APP@{ARGS\_\-APP}}
+\index{ARGS\_\-APP@{ARGS\_\-APP}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{ARGS\_\-APP}]{\setlength{\rightskip}{0pt plus 5cm}\#define ARGS\_\-APP~(1)}}
+\label{cortex__m3__test__platform_8c_acef372fcb503aadbe8c372a23acaa521}
+
+
+Definition at line 31 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_ac2a83118af3a0c8328fef5041317066f}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!ARGS\_\-MAX@{ARGS\_\-MAX}}
+\index{ARGS\_\-MAX@{ARGS\_\-MAX}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{ARGS\_\-MAX}]{\setlength{\rightskip}{0pt plus 5cm}\#define ARGS\_\-MAX~(3)}}
+\label{cortex__m3__test__platform_8c_ac2a83118af3a0c8328fef5041317066f}
+
+
+Definition at line 30 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a30f5fe1fdd6ea23039e8fd5729a1653b}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!ARGS\_\-MIN@{ARGS\_\-MIN}}
+\index{ARGS\_\-MIN@{ARGS\_\-MIN}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{ARGS\_\-MIN}]{\setlength{\rightskip}{0pt plus 5cm}\#define ARGS\_\-MIN~(2)}}
+\label{cortex__m3__test__platform_8c_a30f5fe1fdd6ea23039e8fd5729a1653b}
+
+
+Definition at line 29 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a7c9d515490d6647cdef24309fe73af79}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!ARGS\_\-VAR@{ARGS\_\-VAR}}
+\index{ARGS\_\-VAR@{ARGS\_\-VAR}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{ARGS\_\-VAR}]{\setlength{\rightskip}{0pt plus 5cm}\#define ARGS\_\-VAR~(2)}}
+\label{cortex__m3__test__platform_8c_a7c9d515490d6647cdef24309fe73af79}
+
+
+Definition at line 32 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a66cd4ee580a97c809c231eb147c7d3fa}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!SIM\_\-ATTRS@{SIM\_\-ATTRS}}
+\index{SIM\_\-ATTRS@{SIM\_\-ATTRS}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{SIM\_\-ATTRS}]{\setlength{\rightskip}{0pt plus 5cm}\#define SIM\_\-ATTRS~(ICM\_\-ATTR\_\-RELAXED\_\-SCHED)}}
+\label{cortex__m3__test__platform_8c_a66cd4ee580a97c809c231eb147c7d3fa}
+
+
+Definition at line 26 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_aa834f9971a4fce6e7be7dc1188ba5cd8}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!UART\_\-USE\_\-LOGFILE@{UART\_\-USE\_\-LOGFILE}}
+\index{UART\_\-USE\_\-LOGFILE@{UART\_\-USE\_\-LOGFILE}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{UART\_\-USE\_\-LOGFILE}]{\setlength{\rightskip}{0pt plus 5cm}\#define UART\_\-USE\_\-LOGFILE~(0)}}
+\label{cortex__m3__test__platform_8c_aa834f9971a4fce6e7be7dc1188ba5cd8}
+
+
+Definition at line 36 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a45f28f7499423c46617a069f316492b5}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!UART\_\-USE\_\-SOCKETS@{UART\_\-USE\_\-SOCKETS}}
+\index{UART\_\-USE\_\-SOCKETS@{UART\_\-USE\_\-SOCKETS}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{UART\_\-USE\_\-SOCKETS}]{\setlength{\rightskip}{0pt plus 5cm}\#define UART\_\-USE\_\-SOCKETS~(0)}}
+\label{cortex__m3__test__platform_8c_a45f28f7499423c46617a069f316492b5}
+
+
+Definition at line 35 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a21357be44799ea7df74ee57fbdc01f11}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!UART\_\-USE\_\-STDOUT@{UART\_\-USE\_\-STDOUT}}
+\index{UART\_\-USE\_\-STDOUT@{UART\_\-USE\_\-STDOUT}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{UART\_\-USE\_\-STDOUT}]{\setlength{\rightskip}{0pt plus 5cm}\#define UART\_\-USE\_\-STDOUT~(1)}}
+\label{cortex__m3__test__platform_8c_a21357be44799ea7df74ee57fbdc01f11}
+
+
+Definition at line 37 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{cortex__m3__test__platform_8c_a73d4965df52a1202cfb5ea6975343949}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!create\_\-platform@{create\_\-platform}}
+\index{create\_\-platform@{create\_\-platform}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{create\_\-platform}]{\setlength{\rightskip}{0pt plus 5cm}static void create\_\-platform (
+\begin{DoxyParamCaption}
+\item[{icmProcessorP $\ast$}]{cpu}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{cortex__m3__test__platform_8c_a73d4965df52a1202cfb5ea6975343949}
+
+
+Create the platform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cpu} & Pointer to the processor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 139 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!main@{main}}
+\index{main@{main}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}
+\label{cortex__m3__test__platform_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Simulation entry point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Command-\/line arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Simulation status. 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a9d09353ebb8a010f64e86ae867660816}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!parse\_\-args@{parse\_\-args}}
+\index{parse\_\-args@{parse\_\-args}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{parse\_\-args}]{\setlength{\rightskip}{0pt plus 5cm}static void parse\_\-args (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{cortex__m3__test__platform_8c_a9d09353ebb8a010f64e86ae867660816}
+
+
+Parse command-\/line arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Command-\/line arguments. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 111 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{cortex__m3__test__platform_8c_a33c5b7a1a2460b52fd523966dd072eaa}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!application@{application}}
+\index{application@{application}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{application}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ {\bf application}}}
+\label{cortex__m3__test__platform_8c_a33c5b7a1a2460b52fd523966dd072eaa}
+
+
+Application to load (variable set by command-\/line argument). 
+
+
+
+Definition at line 43 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_aef1bd6ad890a110b466cb0e8088507a2}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!usage@{usage}}
+\index{usage@{usage}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{usage}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ {\bf usage} = \char`\"{}\mbox{[}application\mbox{]} \mbox{[}{\bf variant} (optional)\mbox{]}\char`\"{}}}
+\label{cortex__m3__test__platform_8c_aef1bd6ad890a110b466cb0e8088507a2}
+\begin{DoxyRemark}{Remarks}
+Valid command line: \mbox{[}application name\mbox{]} \mbox{[}variant (optional)\mbox{]}. Default variant is \char`\"{}Cortex-\/M3\char`\"{}. 
+\end{DoxyRemark}
+
+
+Definition at line 40 of file cortex\_\-m3\_\-test\_\-platform.c.
+
+\hypertarget{cortex__m3__test__platform_8c_a850c6332f7c8a964cd52555c07b410ad}{
+\index{cortex\_\-m3\_\-test\_\-platform.c@{cortex\_\-m3\_\-test\_\-platform.c}!variant@{variant}}
+\index{variant@{variant}!cortex_m3_test_platform.c@{cortex\_\-m3\_\-test\_\-platform.c}}
+\subsubsection[{variant}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ {\bf variant} = \char`\"{}Cortex-\/M3\char`\"{}}}
+\label{cortex__m3__test__platform_8c_a850c6332f7c8a964cd52555c07b410ad}
+
+
+Processor variant, default set to Cortex-\/M3 (variable set by command-\/line argument). 
+
+
+
+Definition at line 46 of file cortex\_\-m3\_\-test\_\-platform.c.
+

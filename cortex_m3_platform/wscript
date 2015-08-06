@@ -1,0 +1,88 @@
+"""
+ * WAF build script for the Cortex-M3 test platform and the application.
+ *
+ * Author: Shahzeb Ihsan
+ * Version: 1.0
+"""
+
+# Import packages...
+import os
+
+from waflib.Build \
+import BuildContext, CleanContext, InstallContext, UninstallContext
+
+def configure(ctx):
+   # Configure platform compiler...
+   print "\r\nConfiguring platform compiler..."
+   
+   # Set-up OVP environment 
+   ovp_home = os.environ['IMPERAS_HOME']
+   ovp_lib = ovp_home + "\\lib\\" + os.environ['IMPERAS_ARCH']
+   ovp_bin = ovp_home + "\\bin\\" + os.environ['IMPERAS_ARCH']
+   
+   # OVP libraries
+   icm_stubs = ovp_bin + "\\icm.import.a"
+   vmi_stubs = ovp_bin + "\\vmiStubs.lib"
+   
+   # OVP invlucde paths
+   vmi_inc = "-I" + ovp_home + "\\ImpPublic\\include\\common"
+   vmi_inc += " -I" + ovp_home + "\\ImpPublic\\include\\host"
+   vmi_inc += " -I" + ovp_home + "\\ImpProprietary\\include\\host"
+   
+   # Set-up platform compiler options
+   ctx.setenv('platform')
+   ctx.find_program('gcc', var='compiler')
+   ctx.env.cflags = vmi_inc + "-m32 -Wall -Werror -O0 -g -gdwarf-2"
+   ctx.env.ldflags = "-L" + ovp_home + "\\bin\\" + os.environ['IMPERAS_ARCH'] + " -lRuntimeLoader"
+   ctx.env.icm_stubs = icm_stubs
+   print "Done!"
+
+   # Configure application compiler...
+   print "\r\nConfiguring application compiler..."
+   ctx.setenv('app')
+   ctx.env.aflags = '-mthumb -march=armv7-m -mlittle-endian -ahls -mapcs-32 -o'
+   ctx.env.cflags = "-mthumb -march=armv7-m -mfix-cortex-m3-ldrd -mlittle-endian -Wa,-ahls, -L -g -ggdb -c -O0 -o"
+   ctx.find_program('arm-none-eabi-as', var='asm', path_list=['C:\\dev\\yagarto\\bin'])
+   ctx.find_program('arm-none-eabi-ld', var='linker', path_list=['C:\\dev\\yagarto\\bin'])
+   ctx.find_program('arm-none-eabi-gcc', var='compiler', path_list=['C:\\dev\\yagarto\\bin'])
+   print "Done!\r\n"
+
+def build(bld):
+   if bld.variant == 'platform':
+      # Compiling the platform...
+      print "\r\nCompiling the platform..."
+      
+      # Build the object file
+      bld(rule = "${bld.env.compiler} -c -o ${TGT} ${SRC} " + bld.env.cflags, source = "platform.c", target = "platform.o")
+      
+      # Build the dll
+      bld(rule = "${bld.env.compiler} -m32 -shared -o ${TGT} ${SRC} " + bld.env.ldflags + " " + bld.env.icm_stubs, source = "platform.o", target = "platform.dll")
+      
+      # Build the executable
+      bld(rule = "${bld.env.compiler} -m32 -o ${TGT} ${SRC} " + bld.env.ldflags + " " + bld.env.icm_stubs, source = "platform.o", target = "cortex_m3_platform.exe")
+
+      print "Done!\r\n"
+      
+   elif bld.variant == 'app':
+      # Compiling the application...
+      print "\r\nCompiling the application..."
+      
+      # Build the assembler files
+      bld(rule = "${bld.env.asm} " + bld.env.aflags + " ${TGT} ${SRC} > asm.lst", source = "start.s", target = "start.o")
+
+      # Build the application C files
+      bld(rule = "${bld.env.compiler} " + bld.env.cflags + " ${TGT} ${SRC} > c.lst", source = "echo.c", target = "echo.o")
+      
+      # Link the ELF application
+      link_script = bld.path.find_resource('link.ld').abspath()
+      bld(rule = "${bld.env.linker} -o ${TGT} -T" + str(link_script) + " -N -n ${SRC}", source = "start.o echo.o", target = "echo.elf")
+      
+      print "Done!\r\n"
+
+
+for i in 'platform app'.split():
+   for j in (BuildContext, CleanContext, InstallContext, UninstallContext):
+      name = j.__name__.replace('Context','').lower()
+      class tmp(j): 
+         cmd = name + '_' + i
+         variant = i

@@ -1,0 +1,7 @@
+BINDIR = 'C:\\docume~1\\uidc1485\\locals~1\\temp/bin'
+LIBDIR = 'C:\\docume~1\\uidc1485\\locals~1\\temp/lib'
+PREFIX = 'C:\\docume~1\\uidc1485\\locals~1\\temp'
+cflags = '-IC:\\dev\\ovp\\ImpPublic\\include\\common -IC:\\dev\\ovp\\ImpPublic\\include\\host -IC:\\dev\\ovp\\ImpProprietary\\include\\host-m32 -Wall -Werror -O0 -g -gdwarf-2'
+compiler = 'C:\\dev\\mingw\\bin\\gcc.exe'
+icm_stubs = 'C:\\dev\\ovp\\bin\\Windows\\icm.import.a'
+ldflags = '-LC:\\dev\\ovp\\bin\\Windows -lRuntimeLoader'

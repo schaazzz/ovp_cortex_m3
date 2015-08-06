@@ -1,0 +1,376 @@
+\hypertarget{platform_8h}{
+\section{platform.h File Reference}
+\label{platform_8h}\index{platform.h@{platform.h}}
+}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct____options}{\_\-\_\-options}
+\begin{DoxyCompactList}\small\item\em Command line options structure. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct____dbg__hook}{\_\-\_\-dbg\_\-hook}
+\begin{DoxyCompactList}\small\item\em Debug hook structure. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{platform_8h_a076f9ddddaeea87a4e286263aeb95a2d}{SIM\_\-TRACE\_\-INSTR}~(0)
+\begin{DoxyCompactList}\small\item\em Configuration option for enabling instruction tracing. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{platform_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}~(1 == 1)
+\item 
+\#define \hyperlink{platform_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}~(1 == 0)
+\item 
+\#define \hyperlink{platform_8h_a66cd4ee580a97c809c231eb147c7d3fa}{SIM\_\-ATTRS}~(/$\ast$ICM\_\-ATTR\_\-SIMEX $|$$\ast$/ ICM\_\-ATTR\_\-RELAXED\_\-SCHED)
+\begin{DoxyCompactList}\small\item\em Default simulation options. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{platform_8h_a7ab53be9026b347c6d30c70ce9931a8e}{MEM\_\-INSTR\_\-SIZE}~(0x00040000 -\/ 1)
+\item 
+\#define \hyperlink{platform_8h_a45da10a82ff9dd1b265f8db9657545ae}{MEM\_\-INSTR\_\-START\_\-ADDR}~(0x00000000)
+\item 
+\#define \hyperlink{platform_8h_aed6a1365db36fc3d096e5dc2775cd58a}{MEM\_\-DATA\_\-SIZE}~(0x00010000 -\/ 1)
+\item 
+\#define \hyperlink{platform_8h_adaaaab38151403a899609f228de744be}{MEM\_\-DATA\_\-START\_\-ADDR}~(0x00040000)
+\item 
+\#define \hyperlink{platform_8h_a170f25cc34237375e8677a9fc4cc6a5d}{PER\_\-UART\_\-START\_\-ADDR}~(0x00100000)
+\item 
+\#define \hyperlink{platform_8h_a85226d8c1687a0fee8ae19e494ea9492}{PER\_\-UART\_\-END\_\-ADDR}~(0x00100fff)
+\item 
+\#define \hyperlink{platform_8h_a4ea23c795732393135cae38228304ef8}{MEM\_\-LOG\_\-SIZE}~(0x02 -\/ 1)
+\item 
+\#define \hyperlink{platform_8h_a05fcfa6fcb73ebdf510156d6d22e2b65}{MEM\_\-LOG\_\-START\_\-ADDR}~(0x00200000)
+\item 
+\#define \hyperlink{platform_8h_a291f9ed794f995e3fb7c0af041dfa39b}{MEM\_\-LOG\_\-END\_\-ADDR}~(0x00200001)
+\item 
+\#define \hyperlink{platform_8h_a01874b794c4a7eecb25b4d1effb3ba61}{MEM\_\-LOG\_\-TRIG}~(MEM\_\-LOG\_\-END\_\-ADDR)
+\item 
+\#define \hyperlink{platform_8h_afe92a4d4ac0da4fd5a179147be186085}{ARGS\_\-NUM\_\-MIN}~(2)
+\item 
+\#define \hyperlink{platform_8h_a768343de7cf0e088d00ba8fa2702b0df}{DEFAULT\_\-UART\_\-PORT\_\-NUM}~(17231)
+\item 
+\#define \hyperlink{platform_8h_aa86e84276779fd570edb7339d416e27d}{DEFAULT\_\-GDB\_\-PORT\_\-NUM}~(9999)
+\item 
+\#define \hyperlink{platform_8h_a474e6ef3d993f7a1473475609574234c}{DEFAULT\_\-CPU\_\-VAR\_\-STR}~\char`\"{}Cortex-\/M3\char`\"{}
+\item 
+\#define \hyperlink{platform_8h_a3fb98211bdf8a3a8de2af08ac6ced82e}{DEFAULT\_\-GDB\_\-PORT\_\-STR}~\char`\"{}9999\char`\"{}
+\item 
+\#define \hyperlink{platform_8h_a4d175ba582e5d87e8a35b8ee0d707d96}{DEFAULT\_\-UART\_\-PORT\_\-STR}~\char`\"{}17321\char`\"{}
+\item 
+\#define \hyperlink{platform_8h_ad25e8f466f9dad020f5412471f1ed267}{DEFAULT\_\-UART\_\-LOGFILE\_\-STR}~\char`\"{}uart.log\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned char \hyperlink{platform_8h_a449976458a084f880dc8e3d29e7eb6f5}{bool\_\-t}
+\item 
+typedef signed char \hyperlink{platform_8h_a54cceacffb6d6dff03bf69f786d431a9}{sint8\_\-t}
+\item 
+typedef unsigned char \hyperlink{platform_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_\-t}
+\item 
+typedef signed short int \hyperlink{platform_8h_a80ada937686f2e05ea7b35ac9251cc94}{sint16\_\-t}
+\item 
+typedef unsigned short int \hyperlink{platform_8h_adf4d876453337156dde61095e1f20223}{uint16\_\-t}
+\item 
+typedef signed int \hyperlink{platform_8h_a8c9e624d3bfe61cde9103a7dffe7064d}{sint32\_\-t}
+\item 
+typedef unsigned int \hyperlink{platform_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_\-t}
+\item 
+typedef struct \hyperlink{struct____options}{\_\-\_\-options} \hyperlink{platform_8h_aba6a2c52ce4b48e1d571ed6aee92ae4f}{options\_\-t}
+\item 
+typedef struct \hyperlink{struct____dbg__hook}{\_\-\_\-dbg\_\-hook} \hyperlink{platform_8h_a41398f3a6c172111fbfb6450cd9d905c}{dbg\_\-hook\_\-t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header for the Cortex-\/M3 test platform.
+
+\begin{DoxyAuthor}{Author}
+Shahzeb Ihsan 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0 
+\end{DoxyVersion}
+
+
+Definition in file \hyperlink{platform_8h_source}{platform.h}.
+
+
+
+\subsection{Define Documentation}
+\hypertarget{platform_8h_afe92a4d4ac0da4fd5a179147be186085}{
+\index{platform.h@{platform.h}!ARGS\_\-NUM\_\-MIN@{ARGS\_\-NUM\_\-MIN}}
+\index{ARGS\_\-NUM\_\-MIN@{ARGS\_\-NUM\_\-MIN}!platform.h@{platform.h}}
+\subsubsection[{ARGS\_\-NUM\_\-MIN}]{\setlength{\rightskip}{0pt plus 5cm}\#define ARGS\_\-NUM\_\-MIN~(2)}}
+\label{platform_8h_afe92a4d4ac0da4fd5a179147be186085}
+
+
+Definition at line 86 of file platform.h.
+
+\hypertarget{platform_8h_a474e6ef3d993f7a1473475609574234c}{
+\index{platform.h@{platform.h}!DEFAULT\_\-CPU\_\-VAR\_\-STR@{DEFAULT\_\-CPU\_\-VAR\_\-STR}}
+\index{DEFAULT\_\-CPU\_\-VAR\_\-STR@{DEFAULT\_\-CPU\_\-VAR\_\-STR}!platform.h@{platform.h}}
+\subsubsection[{DEFAULT\_\-CPU\_\-VAR\_\-STR}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULT\_\-CPU\_\-VAR\_\-STR~\char`\"{}Cortex-\/M3\char`\"{}}}
+\label{platform_8h_a474e6ef3d993f7a1473475609574234c}
+
+
+Definition at line 89 of file platform.h.
+
+\hypertarget{platform_8h_aa86e84276779fd570edb7339d416e27d}{
+\index{platform.h@{platform.h}!DEFAULT\_\-GDB\_\-PORT\_\-NUM@{DEFAULT\_\-GDB\_\-PORT\_\-NUM}}
+\index{DEFAULT\_\-GDB\_\-PORT\_\-NUM@{DEFAULT\_\-GDB\_\-PORT\_\-NUM}!platform.h@{platform.h}}
+\subsubsection[{DEFAULT\_\-GDB\_\-PORT\_\-NUM}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULT\_\-GDB\_\-PORT\_\-NUM~(9999)}}
+\label{platform_8h_aa86e84276779fd570edb7339d416e27d}
+
+
+Definition at line 88 of file platform.h.
+
+\hypertarget{platform_8h_a3fb98211bdf8a3a8de2af08ac6ced82e}{
+\index{platform.h@{platform.h}!DEFAULT\_\-GDB\_\-PORT\_\-STR@{DEFAULT\_\-GDB\_\-PORT\_\-STR}}
+\index{DEFAULT\_\-GDB\_\-PORT\_\-STR@{DEFAULT\_\-GDB\_\-PORT\_\-STR}!platform.h@{platform.h}}
+\subsubsection[{DEFAULT\_\-GDB\_\-PORT\_\-STR}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULT\_\-GDB\_\-PORT\_\-STR~\char`\"{}9999\char`\"{}}}
+\label{platform_8h_a3fb98211bdf8a3a8de2af08ac6ced82e}
+
+
+Definition at line 90 of file platform.h.
+
+\hypertarget{platform_8h_ad25e8f466f9dad020f5412471f1ed267}{
+\index{platform.h@{platform.h}!DEFAULT\_\-UART\_\-LOGFILE\_\-STR@{DEFAULT\_\-UART\_\-LOGFILE\_\-STR}}
+\index{DEFAULT\_\-UART\_\-LOGFILE\_\-STR@{DEFAULT\_\-UART\_\-LOGFILE\_\-STR}!platform.h@{platform.h}}
+\subsubsection[{DEFAULT\_\-UART\_\-LOGFILE\_\-STR}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULT\_\-UART\_\-LOGFILE\_\-STR~\char`\"{}uart.log\char`\"{}}}
+\label{platform_8h_ad25e8f466f9dad020f5412471f1ed267}
+
+
+Definition at line 92 of file platform.h.
+
+\hypertarget{platform_8h_a768343de7cf0e088d00ba8fa2702b0df}{
+\index{platform.h@{platform.h}!DEFAULT\_\-UART\_\-PORT\_\-NUM@{DEFAULT\_\-UART\_\-PORT\_\-NUM}}
+\index{DEFAULT\_\-UART\_\-PORT\_\-NUM@{DEFAULT\_\-UART\_\-PORT\_\-NUM}!platform.h@{platform.h}}
+\subsubsection[{DEFAULT\_\-UART\_\-PORT\_\-NUM}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULT\_\-UART\_\-PORT\_\-NUM~(17231)}}
+\label{platform_8h_a768343de7cf0e088d00ba8fa2702b0df}
+
+
+Definition at line 87 of file platform.h.
+
+\hypertarget{platform_8h_a4d175ba582e5d87e8a35b8ee0d707d96}{
+\index{platform.h@{platform.h}!DEFAULT\_\-UART\_\-PORT\_\-STR@{DEFAULT\_\-UART\_\-PORT\_\-STR}}
+\index{DEFAULT\_\-UART\_\-PORT\_\-STR@{DEFAULT\_\-UART\_\-PORT\_\-STR}!platform.h@{platform.h}}
+\subsubsection[{DEFAULT\_\-UART\_\-PORT\_\-STR}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULT\_\-UART\_\-PORT\_\-STR~\char`\"{}17321\char`\"{}}}
+\label{platform_8h_a4d175ba582e5d87e8a35b8ee0d707d96}
+
+
+Definition at line 91 of file platform.h.
+
+\hypertarget{platform_8h_aa93f0eb578d23995850d61f7d61c55c1}{
+\index{platform.h@{platform.h}!FALSE@{FALSE}}
+\index{FALSE@{FALSE}!platform.h@{platform.h}}
+\subsubsection[{FALSE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FALSE~(1 == 0)}}
+\label{platform_8h_aa93f0eb578d23995850d61f7d61c55c1}
+
+
+Definition at line 17 of file platform.h.
+
+\hypertarget{platform_8h_aed6a1365db36fc3d096e5dc2775cd58a}{
+\index{platform.h@{platform.h}!MEM\_\-DATA\_\-SIZE@{MEM\_\-DATA\_\-SIZE}}
+\index{MEM\_\-DATA\_\-SIZE@{MEM\_\-DATA\_\-SIZE}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-DATA\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-DATA\_\-SIZE~(0x00010000 -\/ 1)}}
+\label{platform_8h_aed6a1365db36fc3d096e5dc2775cd58a}
+
+
+Definition at line 74 of file platform.h.
+
+\hypertarget{platform_8h_adaaaab38151403a899609f228de744be}{
+\index{platform.h@{platform.h}!MEM\_\-DATA\_\-START\_\-ADDR@{MEM\_\-DATA\_\-START\_\-ADDR}}
+\index{MEM\_\-DATA\_\-START\_\-ADDR@{MEM\_\-DATA\_\-START\_\-ADDR}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-DATA\_\-START\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-DATA\_\-START\_\-ADDR~(0x00040000)}}
+\label{platform_8h_adaaaab38151403a899609f228de744be}
+
+
+Definition at line 75 of file platform.h.
+
+\hypertarget{platform_8h_a7ab53be9026b347c6d30c70ce9931a8e}{
+\index{platform.h@{platform.h}!MEM\_\-INSTR\_\-SIZE@{MEM\_\-INSTR\_\-SIZE}}
+\index{MEM\_\-INSTR\_\-SIZE@{MEM\_\-INSTR\_\-SIZE}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-INSTR\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-INSTR\_\-SIZE~(0x00040000 -\/ 1)}}
+\label{platform_8h_a7ab53be9026b347c6d30c70ce9931a8e}
+
+
+Definition at line 71 of file platform.h.
+
+\hypertarget{platform_8h_a45da10a82ff9dd1b265f8db9657545ae}{
+\index{platform.h@{platform.h}!MEM\_\-INSTR\_\-START\_\-ADDR@{MEM\_\-INSTR\_\-START\_\-ADDR}}
+\index{MEM\_\-INSTR\_\-START\_\-ADDR@{MEM\_\-INSTR\_\-START\_\-ADDR}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-INSTR\_\-START\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-INSTR\_\-START\_\-ADDR~(0x00000000)}}
+\label{platform_8h_a45da10a82ff9dd1b265f8db9657545ae}
+
+
+Definition at line 72 of file platform.h.
+
+\hypertarget{platform_8h_a291f9ed794f995e3fb7c0af041dfa39b}{
+\index{platform.h@{platform.h}!MEM\_\-LOG\_\-END\_\-ADDR@{MEM\_\-LOG\_\-END\_\-ADDR}}
+\index{MEM\_\-LOG\_\-END\_\-ADDR@{MEM\_\-LOG\_\-END\_\-ADDR}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-LOG\_\-END\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-LOG\_\-END\_\-ADDR~(0x00200001)}}
+\label{platform_8h_a291f9ed794f995e3fb7c0af041dfa39b}
+
+
+Definition at line 82 of file platform.h.
+
+\hypertarget{platform_8h_a4ea23c795732393135cae38228304ef8}{
+\index{platform.h@{platform.h}!MEM\_\-LOG\_\-SIZE@{MEM\_\-LOG\_\-SIZE}}
+\index{MEM\_\-LOG\_\-SIZE@{MEM\_\-LOG\_\-SIZE}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-LOG\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-LOG\_\-SIZE~(0x02 -\/ 1)}}
+\label{platform_8h_a4ea23c795732393135cae38228304ef8}
+
+
+Definition at line 80 of file platform.h.
+
+\hypertarget{platform_8h_a05fcfa6fcb73ebdf510156d6d22e2b65}{
+\index{platform.h@{platform.h}!MEM\_\-LOG\_\-START\_\-ADDR@{MEM\_\-LOG\_\-START\_\-ADDR}}
+\index{MEM\_\-LOG\_\-START\_\-ADDR@{MEM\_\-LOG\_\-START\_\-ADDR}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-LOG\_\-START\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-LOG\_\-START\_\-ADDR~(0x00200000)}}
+\label{platform_8h_a05fcfa6fcb73ebdf510156d6d22e2b65}
+
+
+Definition at line 81 of file platform.h.
+
+\hypertarget{platform_8h_a01874b794c4a7eecb25b4d1effb3ba61}{
+\index{platform.h@{platform.h}!MEM\_\-LOG\_\-TRIG@{MEM\_\-LOG\_\-TRIG}}
+\index{MEM\_\-LOG\_\-TRIG@{MEM\_\-LOG\_\-TRIG}!platform.h@{platform.h}}
+\subsubsection[{MEM\_\-LOG\_\-TRIG}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-LOG\_\-TRIG~(MEM\_\-LOG\_\-END\_\-ADDR)}}
+\label{platform_8h_a01874b794c4a7eecb25b4d1effb3ba61}
+
+
+Definition at line 83 of file platform.h.
+
+\hypertarget{platform_8h_a85226d8c1687a0fee8ae19e494ea9492}{
+\index{platform.h@{platform.h}!PER\_\-UART\_\-END\_\-ADDR@{PER\_\-UART\_\-END\_\-ADDR}}
+\index{PER\_\-UART\_\-END\_\-ADDR@{PER\_\-UART\_\-END\_\-ADDR}!platform.h@{platform.h}}
+\subsubsection[{PER\_\-UART\_\-END\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define PER\_\-UART\_\-END\_\-ADDR~(0x00100fff)}}
+\label{platform_8h_a85226d8c1687a0fee8ae19e494ea9492}
+
+
+Definition at line 78 of file platform.h.
+
+\hypertarget{platform_8h_a170f25cc34237375e8677a9fc4cc6a5d}{
+\index{platform.h@{platform.h}!PER\_\-UART\_\-START\_\-ADDR@{PER\_\-UART\_\-START\_\-ADDR}}
+\index{PER\_\-UART\_\-START\_\-ADDR@{PER\_\-UART\_\-START\_\-ADDR}!platform.h@{platform.h}}
+\subsubsection[{PER\_\-UART\_\-START\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define PER\_\-UART\_\-START\_\-ADDR~(0x00100000)}}
+\label{platform_8h_a170f25cc34237375e8677a9fc4cc6a5d}
+
+
+Definition at line 77 of file platform.h.
+
+\hypertarget{platform_8h_a66cd4ee580a97c809c231eb147c7d3fa}{
+\index{platform.h@{platform.h}!SIM\_\-ATTRS@{SIM\_\-ATTRS}}
+\index{SIM\_\-ATTRS@{SIM\_\-ATTRS}!platform.h@{platform.h}}
+\subsubsection[{SIM\_\-ATTRS}]{\setlength{\rightskip}{0pt plus 5cm}\#define SIM\_\-ATTRS~(/$\ast$ICM\_\-ATTR\_\-SIMEX $|$$\ast$/ ICM\_\-ATTR\_\-RELAXED\_\-SCHED)}}
+\label{platform_8h_a66cd4ee580a97c809c231eb147c7d3fa}
+
+
+Default simulation options. 
+
+
+
+Definition at line 64 of file platform.h.
+
+\hypertarget{platform_8h_a076f9ddddaeea87a4e286263aeb95a2d}{
+\index{platform.h@{platform.h}!SIM\_\-TRACE\_\-INSTR@{SIM\_\-TRACE\_\-INSTR}}
+\index{SIM\_\-TRACE\_\-INSTR@{SIM\_\-TRACE\_\-INSTR}!platform.h@{platform.h}}
+\subsubsection[{SIM\_\-TRACE\_\-INSTR}]{\setlength{\rightskip}{0pt plus 5cm}\#define SIM\_\-TRACE\_\-INSTR~(0)}}
+\label{platform_8h_a076f9ddddaeea87a4e286263aeb95a2d}
+
+
+Configuration option for enabling instruction tracing. 
+
+
+
+Definition at line 12 of file platform.h.
+
+\hypertarget{platform_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{
+\index{platform.h@{platform.h}!TRUE@{TRUE}}
+\index{TRUE@{TRUE}!platform.h@{platform.h}}
+\subsubsection[{TRUE}]{\setlength{\rightskip}{0pt plus 5cm}\#define TRUE~(1 == 1)}}
+\label{platform_8h_aa8cecfc5c5c054d2875c03e77b7be15d}
+
+
+Definition at line 16 of file platform.h.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{platform_8h_a449976458a084f880dc8e3d29e7eb6f5}{
+\index{platform.h@{platform.h}!bool\_\-t@{bool\_\-t}}
+\index{bool\_\-t@{bool\_\-t}!platform.h@{platform.h}}
+\subsubsection[{bool\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned char {\bf bool\_\-t}}}
+\label{platform_8h_a449976458a084f880dc8e3d29e7eb6f5}
+
+
+Definition at line 15 of file platform.h.
+
+\hypertarget{platform_8h_a41398f3a6c172111fbfb6450cd9d905c}{
+\index{platform.h@{platform.h}!dbg\_\-hook\_\-t@{dbg\_\-hook\_\-t}}
+\index{dbg\_\-hook\_\-t@{dbg\_\-hook\_\-t}!platform.h@{platform.h}}
+\subsubsection[{dbg\_\-hook\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-\_\-dbg\_\-hook} {\bf dbg\_\-hook\_\-t}}}
+\label{platform_8h_a41398f3a6c172111fbfb6450cd9d905c}
+
+
+Definition at line 52 of file platform.h.
+
+\hypertarget{platform_8h_aba6a2c52ce4b48e1d571ed6aee92ae4f}{
+\index{platform.h@{platform.h}!options\_\-t@{options\_\-t}}
+\index{options\_\-t@{options\_\-t}!platform.h@{platform.h}}
+\subsubsection[{options\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-\_\-options} {\bf options\_\-t}}}
+\label{platform_8h_aba6a2c52ce4b48e1d571ed6aee92ae4f}
+
+
+Definition at line 42 of file platform.h.
+
+\hypertarget{platform_8h_a80ada937686f2e05ea7b35ac9251cc94}{
+\index{platform.h@{platform.h}!sint16\_\-t@{sint16\_\-t}}
+\index{sint16\_\-t@{sint16\_\-t}!platform.h@{platform.h}}
+\subsubsection[{sint16\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef signed short int {\bf sint16\_\-t}}}
+\label{platform_8h_a80ada937686f2e05ea7b35ac9251cc94}
+
+
+Definition at line 22 of file platform.h.
+
+\hypertarget{platform_8h_a8c9e624d3bfe61cde9103a7dffe7064d}{
+\index{platform.h@{platform.h}!sint32\_\-t@{sint32\_\-t}}
+\index{sint32\_\-t@{sint32\_\-t}!platform.h@{platform.h}}
+\subsubsection[{sint32\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef signed int {\bf sint32\_\-t}}}
+\label{platform_8h_a8c9e624d3bfe61cde9103a7dffe7064d}
+
+
+Definition at line 24 of file platform.h.
+
+\hypertarget{platform_8h_a54cceacffb6d6dff03bf69f786d431a9}{
+\index{platform.h@{platform.h}!sint8\_\-t@{sint8\_\-t}}
+\index{sint8\_\-t@{sint8\_\-t}!platform.h@{platform.h}}
+\subsubsection[{sint8\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef signed char {\bf sint8\_\-t}}}
+\label{platform_8h_a54cceacffb6d6dff03bf69f786d431a9}
+
+
+Definition at line 20 of file platform.h.
+
+\hypertarget{platform_8h_adf4d876453337156dde61095e1f20223}{
+\index{platform.h@{platform.h}!uint16\_\-t@{uint16\_\-t}}
+\index{uint16\_\-t@{uint16\_\-t}!platform.h@{platform.h}}
+\subsubsection[{uint16\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned short int {\bf uint16\_\-t}}}
+\label{platform_8h_adf4d876453337156dde61095e1f20223}
+
+
+Definition at line 23 of file platform.h.
+
+\hypertarget{platform_8h_a435d1572bf3f880d55459d9805097f62}{
+\index{platform.h@{platform.h}!uint32\_\-t@{uint32\_\-t}}
+\index{uint32\_\-t@{uint32\_\-t}!platform.h@{platform.h}}
+\subsubsection[{uint32\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf uint32\_\-t}}}
+\label{platform_8h_a435d1572bf3f880d55459d9805097f62}
+
+
+Definition at line 25 of file platform.h.
+
+\hypertarget{platform_8h_aba7bc1797add20fe3efdf37ced1182c5}{
+\index{platform.h@{platform.h}!uint8\_\-t@{uint8\_\-t}}
+\index{uint8\_\-t@{uint8\_\-t}!platform.h@{platform.h}}
+\subsubsection[{uint8\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned char {\bf uint8\_\-t}}}
+\label{platform_8h_aba7bc1797add20fe3efdf37ced1182c5}
+
+
+Definition at line 21 of file platform.h.
+
